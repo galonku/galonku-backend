@@ -1,2 +1,2 @@
 # galonku-backend
-Galonku Backend
+Backend section for Galonku Web application

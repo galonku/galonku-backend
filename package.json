@@ -1,0 +1,10 @@
+{
+  "name": "galonku-backend",
+  "version": "1.0.0",
+  "description": "Back-end section for Galonku web application",
+  "main": "index.js",
+  "repository": "git@github.com:andromedaorg/galonku-backend.git",
+  "author": "Arie Brainware <jtucke22@mail.ccsf.edu>",
+  "license": "MIT",
+  "private": true
+}
