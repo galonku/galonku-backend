@@ -16,6 +16,11 @@ require('dotenv-extended').load({
     overrideProcessEnv: false
 });
 
+const environment = process.env.NODE_ENV
+let ENV 
+if(environment==='development') ENV = process.env.DEVELOPMENT_JWT_SECRET
+else if(environment==='production') ENV = process.env.PRODUCTION_JWT_SECRET
+
 const controller = {
     show: async(req, res, next) => {
         Merchant
@@ -109,15 +114,13 @@ const controller = {
                         const token = jwt.sign({
                             username, store_name: merchant.store_name
                         },
-                            process.env.DEVELOPMENT_JWT_SECRET, {
+                            ENV, {
                                 expiresIn: '12h'
                             })
 
                         bcrypt
                             .compare(password, merchant.password)
-                            .then(response => {
-                                console.log(response)
-                                console.log("jwt key:" + process.env.DEVELOPMENT_JWT_SECRET)
+                            .then(response => {                                
                                 if (response) {
                                     res.status(200).send({
                                         message: "Login successfully",
@@ -156,10 +159,6 @@ const controller = {
                                 bcrypt
                                     .compare(req.body.password, merchants.password)
                                     .then(result => {
-                                        console.log("Merchants Password " + merchants.password)
-                                        console.log("password " + password)
-                                        console.log("Data: " + result);
-
                                         if (result) {
                                             Merchant
                                                 .destroy({ where: { id: id } })
