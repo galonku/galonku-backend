@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "node-dev ./index",
-    "seed:all":"sequelize db:seed:all",
-    "seed:undo":"sequelize db:seed:undo:all",
+    "seed:all": "sequelize db:seed:all",
+    "seed:undo": "sequelize db:seed:undo:all",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "migrate:undo:all": "sequelize db:migrate:undo:all"
@@ -19,7 +19,6 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jsonwebtoken": "^8.3.0",
-    "mariadb": "^0.7.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.1",
     "sequelize": "^4.38.0",
