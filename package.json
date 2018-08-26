@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start":"node index",
     "dev": "node-dev ./index",
     "seed:all": "sequelize db:seed:all",
     "seed:undo": "sequelize db:seed:undo:all",
