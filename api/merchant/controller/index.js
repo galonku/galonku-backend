@@ -14,16 +14,18 @@ require('dotenv-extended').load({
     errorOnExtra: false,
     assignToProcessEnv: true,
     overrideProcessEnv: false
-  });
-  
+});
+
 const controller = {
-    show: (req, res, next) => {
+    show: async(req, res, next) => {
         Merchant
             .findAll()
-            .then(data => res.status(200).send(data))
+            .then(merchants => {
+               res.status(200).send(merchants)
+            })
     },
 
-    searchMerchants: (req, res) => {
+    searchMerchants: async(req, res) => {
         const keyword = req.query.q
         const sequelize = require('sequelize')
         const op = sequelize.Op
@@ -51,7 +53,7 @@ const controller = {
         }
     },
 
-    register: (req, res, next) => {
+    register: async (req, res, next) => {
         const {
             username, store_name,
             email, password,
@@ -65,7 +67,9 @@ const controller = {
                     return {
                         username, store_name,
                         email, password: hash,
-                        identity_number, address
+                        phone_number, identity_number, address,
+                        createdAt: new Date() + 7,
+                        updatedAt: new Date() + 7
                     }
                 })
                 .then(newMerchant => {
@@ -73,20 +77,25 @@ const controller = {
                         .build(newMerchant)
                         .save()
                         .then(merchants => {
-                            const { username, store_name, email, address } = merchants
+                            const { username, store_name, email, address, createdAt } = merchants
                             res.status(200).send({
                                 message: "Your merchant account successfully registered!",
                                 data: {
                                     username, store_name,
-                                    email, address
+                                    email, address, createdAt
                                 }
+                            })
+                        })
+                        .catch(err => {
+                            res.status(400).send({
+                                message: err
                             })
                         })
                 })
         }
     },
 
-    login: (req, res) => {
+    login: async (req, res) => {
         const { username, password } = req.body
         if (username && password) {
             Merchant
@@ -96,20 +105,20 @@ const controller = {
                     }
                 })
                 .then(merchant => {
-                    if(merchant){
+                    if (merchant) {
                         const token = jwt.sign({
                             username, store_name: merchant.store_name
                         },
                             process.env.DEVELOPMENT_JWT_SECRET, {
                                 expiresIn: '12h'
                             })
-    
+
                         bcrypt
                             .compare(password, merchant.password)
                             .then(response => {
                                 console.log(response)
                                 console.log("jwt key:" + process.env.DEVELOPMENT_JWT_SECRET)
-                                if (response) {                                
+                                if (response) {
                                     res.status(200).send({
                                         message: "Login successfully",
                                         token
@@ -120,8 +129,8 @@ const controller = {
                                     })
                                 }
                             })
-                    }else{
-                        res.status(404).send({message:"Sorry, username and password doesnt exist. Please register before login!"})
+                    } else {
+                        res.status(404).send({ message: "Sorry, username and password doesnt exist. Please register before login!" })
                     }
                 })
         } else {
@@ -130,24 +139,23 @@ const controller = {
             })
         }
     },
-    deleteAccount: (req, res) => {
+    deleteAccount: async (req, res) => {
         const id = Number(req.params.id)
         const { password } = req.body
         if (id) {
             Merchant.findById(id)
                 .then(merchants => {
-                    if(merchants){
-                        console.log("Merhants username: " + merchants.username)
+                    if (merchants) {                        
                         if (merchants) {
                             if (password) {
                                 bcrypt
                                     .compare(req.body.password, merchants.password)
-    
+
                                     .then(result => {
                                         console.log("Merchants Password " + merchants.password)
                                         console.log("password " + password)
                                         console.log("Data: " + result);
-    
+
                                         if (result) {
                                             Merchant
                                                 .destroy({ where: { id: id } })
@@ -158,8 +166,8 @@ const controller = {
                                     })
                             } else res.status(404).send({ message: "Please specify the password!" })
                         }
-                    }else{
-                        res.status(404).send({message:"Merchants doesnt exist!"})
+                    } else {
+                        res.status(404).send({ message: "Merchants doesnt exist!" })
                     }
                 })
         } else res.status(417).send({ message: "Please specify Merchant ID then input your account password!" })
