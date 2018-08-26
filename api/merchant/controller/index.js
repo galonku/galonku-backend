@@ -139,6 +139,11 @@ const controller = {
             })
         }
     },
+
+    logout: async (req,res) =>{
+        res.status(200).send({message:"Successfully logout!"})
+    },
+
     deleteAccount: async (req, res) => {
         const id = Number(req.params.id)
         const { password } = req.body
@@ -150,7 +155,6 @@ const controller = {
                             if (password) {
                                 bcrypt
                                     .compare(req.body.password, merchants.password)
-
                                     .then(result => {
                                         console.log("Merchants Password " + merchants.password)
                                         console.log("password " + password)

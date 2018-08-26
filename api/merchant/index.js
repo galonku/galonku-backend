@@ -10,6 +10,7 @@ router.get('/verifytoken', authToken.verifyToken, authToken.valid)
 router.get('/', controller.show)
 router.get('/search', controller.searchMerchants)
 router.get('/login', controller.login)
+router.get('/logout', controller.logout)
 router.post('/register/', controller.register)
 router.delete('/delete-account/:id', authToken.verifyToken, controller.deleteAccount)
 
