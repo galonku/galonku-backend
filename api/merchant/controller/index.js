@@ -96,33 +96,33 @@ const controller = {
                     }
                 })
                 .then(merchant => {
-                    const token = jwt.sign({
-                        username, store_name: merchant.store_name
-                    },
-                        process.env.DEVELOPMENT_JWT_SECRET, {
-                            expiresIn: '12h'
-                        })
-
-                    bcrypt
-                        .compare(password, merchant.password,function(err,result){
-                            console.log(result)
-                            console.log(err)
-                            if (result) {                                
-                                res.status(200).send({
-                                    message: "Login successfully",
-                                    token
-                                })
-                            } else {
-                                res.status(400).send({
-                                    message: "Sorry you dont have authorization to access this page!"
-                                })
-                            }
-                        })
-                        // .then((response) => {
-                            
-                        //     console.log("jwt key:" + process.env.DEVELOPMENT_JWT_SECRET)
-                            
-                        // })
+                    if(merchant){
+                        const token = jwt.sign({
+                            username, store_name: merchant.store_name
+                        },
+                            process.env.DEVELOPMENT_JWT_SECRET, {
+                                expiresIn: '12h'
+                            })
+    
+                        bcrypt
+                            .compare(password, merchant.password)
+                            .then(response => {
+                                console.log(response)
+                                console.log("jwt key:" + process.env.DEVELOPMENT_JWT_SECRET)
+                                if (response) {                                
+                                    res.status(200).send({
+                                        message: "Login successfully",
+                                        token
+                                    })
+                                } else {
+                                    res.status(417).send({
+                                        message: "Wrong Password!!"
+                                    })
+                                }
+                            })
+                    }else{
+                        res.status(404).send({message:"Sorry, username and password doesnt exist. Please register before login!"})
+                    }
                 })
         } else {
             res.status(417).send({
