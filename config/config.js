@@ -12,24 +12,24 @@ require('dotenv-extended').load({
 
 module.exports = {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": process.env.DEVELOPMENT_DB_USERNAME,
+    "password": process.env.DEVELOPMENT_DB_PASSWORD,
+    "database": process.env.DEVELOPMENT_DB_NAME,
+    "host": process.env.DEVELOPMENT_DB_HOST,
+    "dialect": process.env.DEVELOPMENT_DB_DIALECT
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": process.env.TEST_DB_USERNAME,
+    "password": process.env.TEST_DB_USERNAME,
+    "database": process.env.TEST_DB_USERNAME,
+    "host": process.env.TEST_DB_USERNAME,
+    "dialect": process.env.TEST_DB_USERNAME
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": process.env.PRODUCTION_DB_USERNAME,
+    "password": process.env.PRODUCTION_DB_USERNAME,
+    "database": process.env.PRODUCTION_DB_USERNAME,
+    "host": process.env.PRODUCTION_DB_USERNAME,
+    "dialect": process.env.PRODUCTION_DB_USERNAME
   }
 }
