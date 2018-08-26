@@ -136,26 +136,30 @@ const controller = {
         if (id) {
             Merchant.findById(id)
                 .then(merchants => {
-                    console.log("Merhants username: " + merchants.username)
-                    if (merchants) {
-                        if (password) {
-                            bcrypt
-                                .compare(req.body.password, merchants.password)
-
-                                .then(result => {
-                                    console.log("Merchants Password " + merchants.password)
-                                    console.log("password " + password)
-                                    console.log("Data: " + result);
-
-                                    if (result) {
-                                        Merchant
-                                            .destroy({ where: { id: id } })
-                                            .then(() => res.status(200).send({ message: "Your account successfully deleted!" }))
-                                    } else {
-                                        res.status(417).send({ message: "Password is incorrect!" })
-                                    }
-                                })
-                        } else res.status(404).send({ message: "Please specify the password!" })
+                    if(merchants){
+                        console.log("Merhants username: " + merchants.username)
+                        if (merchants) {
+                            if (password) {
+                                bcrypt
+                                    .compare(req.body.password, merchants.password)
+    
+                                    .then(result => {
+                                        console.log("Merchants Password " + merchants.password)
+                                        console.log("password " + password)
+                                        console.log("Data: " + result);
+    
+                                        if (result) {
+                                            Merchant
+                                                .destroy({ where: { id: id } })
+                                                .then(() => res.status(200).send({ message: "Your account successfully deleted!" }))
+                                        } else {
+                                            res.status(417).send({ message: "Password is incorrect!" })
+                                        }
+                                    })
+                            } else res.status(404).send({ message: "Please specify the password!" })
+                        }
+                    }else{
+                        res.status(404).send({message:"Merchants doesnt exist!"})
                     }
                 })
         } else res.status(417).send({ message: "Please specify Merchant ID then input your account password!" })
