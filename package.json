@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node-dev ./index"
+    "dev": "node-dev ./index"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.9",
     "dotenv-extended": "^2.2.0",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.3.0",
     "mariadb": "^0.7.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.1",

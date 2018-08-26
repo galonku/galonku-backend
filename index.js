@@ -1,5 +1,15 @@
 #!/usr/bin/env node
-
+require('dotenv-extended').load({
+  encoding: 'utf8',
+  silent: true,
+  path: '.env',
+  defaults: '.env.defaults',
+  schema: '.env.schema',
+  errorOnMissing: false,
+  errorOnExtra: false,
+  assignToProcessEnv: true,
+  overrideProcessEnv: false
+});
 /**
  * Module dependencies.
  */
