@@ -7,6 +7,7 @@ const path = require('path')
 const favicon = require('serve-favicon')
 
 const indexRouter = require('./api/index');
+const adminRouter = require('./api/admin/index')
 const merchantRouter = require('./api/merchant/index')
 
 const app = express();
@@ -20,7 +21,8 @@ app.use(cookieParser());
 //handle favicon.ico notfound using module serve-favicon
 app.use(favicon(path.join(__dirname, './', 'favicon.ico')))
 
-app.use('/', indexRouter);
+app.use('/', indexRouter)
+app.use('/admin',adminRouter)
 app.use('/merchants', merchantRouter)
 
 // catch 404 and forward to error handler
