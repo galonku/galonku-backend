@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
             },
             merchants: {
                 "show-merchants": `${host}/merchants`,
-                "register": `${host}/merchants`,
+                "register": `${host}/merchants/register`,
                 "login": `${host}/merchants/login`,
                 "logout": `${host}/merchants/logout`,
                 "delete-account": `${host}/merchants/delete-account/:id`,
