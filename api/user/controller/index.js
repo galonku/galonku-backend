@@ -1,8 +1,13 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const models = require("../../../models/user");
+const models = require("../../../models/index");
 const User = models.user;
+
+const environment = process.env.NODE_ENV;
+let ENV;
+if (environment === "development") ENV = process.env.DEVELOPMENT_JWT_SECRET;
+else if (environment === "production") ENV = process.env.PRODUCTION_JWT_SECRET;
 
 const controller = {
   show: (req, res) => {
@@ -98,8 +103,7 @@ const controller = {
           const token = jwt.sign(
             {
               username,
-              fullname,
-              email
+              fullname: user.fullname
             },
             ENV,
             {
@@ -135,28 +139,48 @@ const controller = {
 
   updateProfile: (req, res) => {
     const { id } = req.params;
-    const { password, email } = req.body;
+    const { password, email, fullname, phone_number, address } = req.body;
 
     if (id) {
-      if (password && email) {
-        User.update(
-          {
-            password,
-            email,
-            address,
-            updatedAt: new Date() + 7
-          },
-          { where: { id: id } }
-        ).then(() => {
-          res.status(200).send({
-            message: "Profile updated"
+      User.findOne({
+        where: {
+          id: id
+        }
+      }).then(user => {
+        if (user) {
+          if (password && email) {
+            const saltRounds = 5;
+            bcrypt
+              .hash(password, saltRounds)
+              .then(hash => {
+                User.update(
+                  {
+                    email,
+                    password: hash,
+                    fullname,
+                    phone_number,
+                    address,
+                    updatedAt: new Date() + 7
+                  },
+                  { where: { id: id } }
+                );
+              })
+              .then(() => {
+                res.status(200).send({
+                  message: "Profile updated"
+                });
+              });
+          } else {
+            res.status(417).send({
+              message: "Please specify password field and email"
+            });
+          }
+        } else {
+          res.status(417).send({
+            message: "No user found"
           });
-        });
-      } else {
-        res.status(417).send({
-          message: "Please specify password field and email"
-        });
-      }
+        }
+      });
     } else {
       res.status(417).send({
         message: "Please specify User ID"
@@ -170,7 +194,7 @@ const controller = {
 
   deleteAccount: async (req, res) => {
     const id = Number(req.params.id);
-    const { password } = req.body;
+    // const { password } = req.body;
     if (id) {
       User.findById(id).then(users => {
         if (users) {
