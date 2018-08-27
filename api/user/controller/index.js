@@ -1,0 +1,188 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const models = require("../../../models/user");
+const User = models.user;
+
+const controller = {
+  show: (req, res) => {
+    User.findAll().then(data => res.status(200).send(data));
+  },
+
+  searchUser: async (req, res) => {
+    const keyword = req.query.q;
+    const sequelize = require("sequelize");
+    const op = sequelize.Op;
+
+    if (keyword) {
+      User.findAll({
+        where: {
+          username: {
+            [op.like]: `%${keyword}%`
+          }
+        }
+      }).then(user => {
+        if (user) {
+          res.status(200).send({
+            user
+          });
+        } else {
+          res.status(404).send({
+            message: "User doesnt exist"
+          });
+        }
+      });
+    }
+  },
+
+  register: (req, res) => {
+    const {
+      username,
+      email,
+      password,
+      fullname,
+      phone_number,
+      address
+    } = req.body;
+
+    if (username && email && password && fullname && phone_number && address) {
+      const saltRounds = 5;
+      bcrypt
+        .hash(password, saltRounds)
+        .then(hash => {
+          return {
+            username,
+            email,
+            password: hash,
+            fullname,
+            phone_number,
+            address,
+            createdAt: new Date() + 7,
+            updatedAt: new Date() + 7
+          };
+        })
+        .then(newUser => {
+          User.build(newUser)
+            .save()
+            .then(user => {
+              const { username, email, fullname, address, createdAt } = user;
+              res.status(200).send({
+                message: "User account successfully registered!",
+                data: {
+                  username,
+                  email,
+                  fullname,
+                  address,
+                  createdAt
+                }
+              });
+            })
+            .catch(err => {
+              res.status(400).send({
+                message: err
+              });
+            });
+        });
+    }
+  },
+
+  login: async (req, res) => {
+    const { username, password } = req.body;
+    if (username && password) {
+      User.findOne({
+        where: {
+          username: username
+        }
+      }).then(user => {
+        if (user) {
+          const token = jwt.sign(
+            {
+              username,
+              fullname,
+              email
+            },
+            ENV,
+            {
+              expiresIn: "12h"
+            }
+          );
+
+          bcrypt.compare(password, user.password).then(response => {
+            if (response) {
+              res.status(200).send({
+                message: "Login successful",
+                token
+              });
+            } else {
+              res.status(417).send({
+                message: "Wrong credentials"
+              });
+            }
+          });
+        } else {
+          res.status(404).send({
+            message:
+              "Sorry, username and password doesnt exist. Please register before login!"
+          });
+        }
+      });
+    } else {
+      res.status(417).send({
+        message: "Please specify username and password"
+      });
+    }
+  },
+
+  updateProfile: (req, res) => {
+    const { id } = req.params;
+    const { password, email } = req.body;
+
+    if (id) {
+      if (password && email) {
+        User.update(
+          {
+            password,
+            email,
+            address,
+            updatedAt: new Date() + 7
+          },
+          { where: { id: id } }
+        ).then(() => {
+          res.status(200).send({
+            message: "Profile updated"
+          });
+        });
+      } else {
+        res.status(417).send({
+          message: "Please specify password field and email"
+        });
+      }
+    } else {
+      res.status(417).send({
+        message: "Please specify User ID"
+      });
+    }
+  },
+
+  logout: async (req, res) => {
+    res.status(200).send({ message: "Logout successdul" });
+  },
+
+  deleteAccount: async (req, res) => {
+    const id = Number(req.params.id);
+    const { password } = req.body;
+    if (id) {
+      User.findById(id).then(users => {
+        if (users) {
+          User.destroy({ where: { id: id } }).then(() =>
+            res.status(200).send({ message: "Account deleted" })
+          );
+        } else {
+          res.status(404).send({ message: "User doesnt exist" });
+        }
+      });
+    } else res.status(417).send({ message: "Please specify User ID" });
+  }
+};
+
+module.exports = controller;
