@@ -1,8 +1,20 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
-const models = require("../../../models/admin");
-const Admin = models.admin;
+const models = require('../../../models/index')
+const Admin = models.admin
+
+require('dotenv-extended').load({
+    encoding: 'utf8',
+    silent: true,
+    path: '.env',
+    defaults: '.env.defaults',
+    schema: '.env.schema',
+    errorOnMissing: false,
+    errorOnExtra: false,
+    assignToProcessEnv: true,
+    overrideProcessEnv: false
+});
 
 const controller = {
   show: (req, res) => {

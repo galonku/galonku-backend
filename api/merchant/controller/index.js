@@ -17,20 +17,20 @@ require('dotenv-extended').load({
 });
 
 const environment = process.env.NODE_ENV
-let ENV 
-if(environment==='development') ENV = process.env.DEVELOPMENT_JWT_SECRET
-else if(environment==='production') ENV = process.env.PRODUCTION_JWT_SECRET
+let ENV
+if (environment === 'development') ENV = process.env.DEVELOPMENT_JWT_SECRET
+else if (environment === 'production') ENV = process.env.PRODUCTION_JWT_SECRET
 
 const controller = {
-    show: async(req, res, next) => {
+    show: async (req, res, next) => {
         Merchant
             .findAll()
             .then(merchants => {
-               res.status(200).send(merchants)
+                res.status(200).send(merchants)
             })
     },
 
-    searchMerchants: async(req, res) => {
+    searchMerchants: async (req, res) => {
         const keyword = req.query.q
         const sequelize = require('sequelize')
         const op = sequelize.Op
@@ -120,7 +120,7 @@ const controller = {
 
                         bcrypt
                             .compare(password, merchant.password)
-                            .then(response => {                                
+                            .then(response => {
                                 if (response) {
                                     res.status(200).send({
                                         message: "Login successfully",
@@ -143,8 +143,38 @@ const controller = {
         }
     },
 
-    logout: async (req,res) =>{
-        res.status(200).send({message:"Successfully logout!"})
+    logout: async (req, res) => {
+        res.status(200).send({ message: "Successfully logout!" })
+    },
+
+    editProfile: async (req, res) => {
+        const id = req.params.id
+        const { password, store_name, address, email, phone_number } = req.body
+
+        if (id) {
+            Merchant.findById(id)
+                .then(merchant => {
+                    if (merchant) {
+                        const saltRounds = 5
+                        bcrypt.hash(password, saltRounds)
+                            .then(hash => {
+                                return {
+                                    store_name,email, password: hash,
+                                    phone_number, address,
+                                    createdAt: new Date() + 7,
+                                    updatedAt: new Date() + 7
+                                }
+                            }).then(updatedMerchants => {
+                                Merchant.update(
+                                    updatedMerchants
+                                , { where: { id: id } })
+                                    .then(() => {
+                                        res.status(200).send({ message: "Updating success" })
+                                    })
+                            })
+                    }
+                })
+        } else res.status(417).send({ message: "Please specify Merchant ID then input your account password!" })
     },
 
     deleteAccount: async (req, res) => {
@@ -153,25 +183,21 @@ const controller = {
         if (id) {
             Merchant.findById(id)
                 .then(merchants => {
-                    if (merchants) {                        
-                        if (merchants) {
-                            if (password) {
-                                bcrypt
-                                    .compare(req.body.password, merchants.password)
-                                    .then(result => {
-                                        if (result) {
-                                            Merchant
-                                                .destroy({ where: { id: id } })
-                                                .then(() => res.status(200).send({ message: "Your account successfully deleted!" }))
-                                        } else {
-                                            res.status(417).send({ message: "Password is incorrect!" })
-                                        }
-                                    })
-                            } else res.status(404).send({ message: "Please specify the password!" })
-                        }
-                    } else {
-                        res.status(404).send({ message: "Merchants doesnt exist!" })
-                    }
+                    if (merchants) {
+                        if (password) {
+                            bcrypt
+                                .compare(password, merchants.password)
+                                .then(result => {
+                                    if (result) {
+                                        Merchant
+                                            .destroy({ where: { id: id } })
+                                            .then(() => res.status(200).send({ message: "Your account successfully deleted!" }))
+                                    } else {
+                                        res.status(417).send({ message: "Password is incorrect!" })
+                                    }
+                                })
+                        } else res.status(404).send({ message: "Please specify the password!" })
+                    } else res.status(404).send({ message: "Merchants doesnt exist!" })
                 })
         } else res.status(417).send({ message: "Please specify Merchant ID then input your account password!" })
     }

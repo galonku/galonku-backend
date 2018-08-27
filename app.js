@@ -7,6 +7,7 @@ const path = require("path");
 const favicon = require("serve-favicon");
 
 const indexRouter = require("./api/index");
+const adminRouter = require('./api/admin/index')
 const merchantRouter = require("./api/merchant/index");
 const userRouter = require("./api/user/index");
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(favicon(path.join(__dirname, "./", "favicon.ico")));
 
 app.use("/", indexRouter);
+app.use('/admin',adminRouter)
 app.use("/merchants", merchantRouter);
 app.use("/users", userRouter);
 
