@@ -25,6 +25,7 @@ _Note: Some URL/Endpoint is still under development_
 | localhost:3000/merchants/logout                | GET    | Logout Merchants          |
 | localhost:3000/merchants/delete-account/:id    | DELETE | Delete Merchants account  |
 | localhost:3000/merchants/search?q={store_name} | GET    | Search Merchants Store    |
+| localhost:3000/users                           | GET    | Show registered Users     |
 | localhost:3000/users/register                  | POST   | Register an Users account |
 | localhost:3000/users/login                     | POST   | Login as Users            |
 | localhost:3000/users/logout                    | GET    | Logout from Users         |
@@ -49,6 +50,7 @@ _Note: Some URL/Endpoint is still under development_
 | https://galonku.herokuapp.com/merchants/logout                | GET    | Logout Merchants          |
 | https://galonku.herokuapp.com/merchants/delete-account/:id    | DELETE | Delete Merchants account  |
 | https://galonku.herokuapp.com/merchants/search?q={store_name} | GET    | Search Merchants Store    |
+| https://galonku.herokuapp.com/users                           | GET    | Show registered Users     |
 | https://galonku.herokuapp.com/users/register                  | POST   | Register an Users account |
 | https://galonku.herokuapp.com/users/login                     | POST   | Login as Users            |
 | https://galonku.herokuapp.com/users/logout                    | GET    | Logout from Users         |
