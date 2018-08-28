@@ -123,7 +123,7 @@ const controller = {
                             .then(response => {
                                 if (response) {
                                     res.status(200).send({
-                                        message: "Login successfully",
+                                        message: "Login successful",
                                         token
                                     })
                                 } else {

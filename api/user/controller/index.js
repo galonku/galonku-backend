@@ -7,7 +7,7 @@ const User = models.user;
 const environment = process.env.NODE_ENV;
 let ENV;
 if (environment === "development") ENV = process.env.DEVELOPMENT_JWT_SECRET;
-else if (environment === "production") ENV = process.env.PRODUCTION_JWT_SECRET;
+else if (environment === "production") ENV = process.env.JWT_SECRET;
 
 const controller = {
   show: (req, res) => {
