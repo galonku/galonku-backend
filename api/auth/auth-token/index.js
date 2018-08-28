@@ -9,7 +9,7 @@ const controller = {
         const DevToken = req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'
         if (DevToken) {    
                 const token = req.headers.authorization.split(' ')[1] || ''
-                jwt.verify(token, process.env.DEVELOPMENT_JWT_SECRET, (error, decoded) => {
+                jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
                     if (error) {
                         res.send(417).send({
                             message: "Token is invalid"
