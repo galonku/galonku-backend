@@ -1,4 +1,4 @@
-const models = require("../../../models/order");
+const models = require("../../../models/index");
 const Order = models.order;
 
 const controller = {
@@ -10,47 +10,38 @@ const controller = {
 
   createOrder: (req, res) => {
     const {
+      iduser,
       merchant,
       quantity,
       phone_number,
       user_address,
       user_notes
     } = req.body;
-    if (merchant && quantity && phone_number && user_address) {
-      return {
+    if (iduser && merchant && quantity && phone_number && user_address) {
+      return Order.create({
+        iduser,
         merchant,
         quantity,
         phone_number,
         user_address,
-        user_notes
-      }.then(newOrder => {
-        Order.build(newOrder)
-          .save()
-          .then(order => {
-            const {
-              merchant,
-              quantity,
-              phone_number,
-              user_address,
-              user_notes
-            } = order;
-            res.status(200).send({
-              message: "Order placed",
-              data: {
-                merchant,
-                quantity,
-                phone_number,
-                user_address,
-                user_notes
-              }
-            });
-          })
-          .catch(err => {
-            res.status(400).send({
-              message: err
-            });
+        user_notes,
+        createdAt: new Date() + 7,
+        updatedAt: new Date() + 7
+      })
+        .then(newOrder => {
+          Order.build(newOrder);
+          res.status(200).send({
+            message: "Order placed",
+            data: newOrder
           });
-      });
+        })
+        .catch(err => {
+          res.status(400).send({
+            message: err
+          });
+        });
     }
   }
 };
+
+module.exports = controller;

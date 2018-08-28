@@ -32,6 +32,10 @@ router.get("/", function(req, res, next) {
           logout: `${host}/users/logout`,
           "delete-account": `${host}/users/delete-account/:id`,
           "search-users": `${host}/users/search?q={username}`
+        },
+        orders: {
+          "show-oders": `${host}/orders`,
+          order: `${host}/orders/order`
         }
       }
     ]
