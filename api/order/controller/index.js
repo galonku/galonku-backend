@@ -28,6 +28,7 @@ const controller = {
             phone_number,
             user_address,
             user_notes,
+            status: "process",
             createdAt: new Date() + 7,
             updatedAt: new Date() + 7
           })

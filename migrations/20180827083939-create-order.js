@@ -27,6 +27,9 @@ module.exports = {
       user_notes: {
         type: Sequelize.TEXT
       },
+      status: {
+        type: Sequelize.ENUM("process", "done")
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.STRING
