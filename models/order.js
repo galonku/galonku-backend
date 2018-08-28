@@ -3,6 +3,10 @@ module.exports = (sequelize, DataTypes) => {
   var order = sequelize.define(
     "order",
     {
+      iduser: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+      },
       merchant: {
         allowNull: false,
         type: DataTypes.STRING(100)
@@ -19,7 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.TEXT
       },
-      user_notes: DataTypes.TEXT
+      user_notes: DataTypes.TEXT,
+      status: {
+        allowNull: false,
+        type: DataTypes.ENUM("process", "done")
+      }
     },
     {}
   );

@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      iduser: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       merchant: {
         type: Sequelize.STRING(100)
       },
@@ -22,6 +26,9 @@ module.exports = {
       },
       user_notes: {
         type: Sequelize.TEXT
+      },
+      status: {
+        type: Sequelize.ENUM("process", "done")
       },
       createdAt: {
         allowNull: false,

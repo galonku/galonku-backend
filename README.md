@@ -25,11 +25,14 @@ _Note: Some URL/Endpoint is still under development_
 | localhost:3000/merchants/logout                | GET    | Logout Merchants          |
 | localhost:3000/merchants/delete-account/:id    | DELETE | Delete Merchants account  |
 | localhost:3000/merchants/search?q={store_name} | GET    | Search Merchants Store    |
+| localhost:3000/users                           | GET    | Show registered Users     |
 | localhost:3000/users/register                  | POST   | Register an Users account |
 | localhost:3000/users/login                     | POST   | Login as Users            |
 | localhost:3000/users/logout                    | GET    | Logout from Users         |
 | localhost:3000/users/delete-account/:id        | DELETE | Delete Users account      |
 | localhost:3000/users/search?q={username}       | GET    | Search Users by username  |
+| localhost:3000/orders/                         | GET    | Get orders                |
+| localhost:3000/orders/order                    | POST   | Create order              |
 
 ---
 
@@ -47,6 +50,7 @@ _Note: Some URL/Endpoint is still under development_
 | https://galonku.herokuapp.com/merchants/logout                | GET    | Logout Merchants          |
 | https://galonku.herokuapp.com/merchants/delete-account/:id    | DELETE | Delete Merchants account  |
 | https://galonku.herokuapp.com/merchants/search?q={store_name} | GET    | Search Merchants Store    |
+| https://galonku.herokuapp.com/users                           | GET    | Show registered Users     |
 | https://galonku.herokuapp.com/users/register                  | POST   | Register an Users account |
 | https://galonku.herokuapp.com/users/login                     | POST   | Login as Users            |
 | https://galonku.herokuapp.com/users/logout                    | GET    | Logout from Users         |
@@ -117,16 +121,18 @@ _Note: Some URL/Endpoint is still under development_
 4. Table Order
 
 ```
-+--------------+--------------+------+-----+---------+----------------+
-| Field        | Type         | Null | Key | Default | Extra          |
-+--------------+--------------+------+-----+---------+----------------+
-| id           | int(11)      | NO   | PRI | NULL    | auto_increment |
-| merchant     | varchar(100) | NO   |     | NULL    |                |
-| quantity     | int(11)      | NO   |     | NULL    |                |
-| phone_number | varchar(30)  | NO   |     | NULL    |                |
-| user_address | text         | NO   |     | NULL    |                |
-| user_notes   | text         | YES  |     | NULL    |                |
-| createdAt    | varchar(255) | NO   |     | NULL    |                |
-| updatedAt    | varchar(255) | NO   |     | NULL    |                |
-+--------------+--------------+------+-----+---------+----------------+
++--------------+------------------------+------+-----+---------+----------------+
+| Field        | Type                   | Null | Key | Default | Extra          |
++--------------+------------------------+------+-----+---------+----------------+
+| id           | int(11)                | NO   | PRI | NULL    | auto_increment |
+| iduser       | int(11)                | NO   | MUL | NULL    |                |
+| merchant     | varchar(100)           | NO   |     | NULL    |                |
+| quantity     | int(11)                | NO   |     | NULL    |                |
+| phone_number | varchar(30)            | NO   |     | NULL    |                |
+| user_address | text                   | NO   |     | NULL    |                |
+| user_notes   | text                   | YES  |     | NULL    |                |
+| status       | enum('process','done') | NO   |     | process |                |
+| createdAt    | varchar(255)           | NO   |     | NULL    |                |
+| updatedAt    | varchar(255)           | NO   |     | NULL    |                |
++--------------+------------------------+------+-----+---------+----------------+
 ```
