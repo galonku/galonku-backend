@@ -3,6 +3,10 @@ module.exports = (sequelize, DataTypes) => {
   var order = sequelize.define(
     "order",
     {
+      iduser: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+      },
       merchant: {
         allowNull: false,
         type: DataTypes.STRING(100)
