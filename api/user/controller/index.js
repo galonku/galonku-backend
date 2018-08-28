@@ -194,13 +194,26 @@ const controller = {
 
   deleteAccount: async (req, res) => {
     const id = Number(req.params.id);
+    const { password } = req.body;
     // const { password } = req.body;
     if (id) {
       User.findById(id).then(users => {
         if (users) {
-          User.destroy({ where: { id: id } }).then(() =>
-            res.status(200).send({ message: "Account deleted" })
-          );
+          if (password) {
+            bcrypt.compare(password, users.password).then(response => {
+              if (response) {
+                User.destroy({ where: { id: id } }).then(() =>
+                  res.status(200).send({ message: "Account deleted" })
+                );
+              } else {
+                res.status(404).send({
+                  message: "Wrong password"
+                });
+              }
+            });
+          } else {
+            res.status(417).send({ message: "Please input password" });
+          }
         } else {
           res.status(404).send({ message: "User doesnt exist" });
         }
