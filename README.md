@@ -11,46 +11,47 @@ Backend section for Galonku Web application
 
 1. Development
 
-*Note: Some URL/Endpoint is still under development*
+_Note: Some URL/Endpoint is still under development_
 
-| URL / Endpoints   | Method | Description                  |
-|-------------------|--------|------------------------------|
-|localhost:port/    |   GET  | Show API Menu                |
-|localhost:port/admins    |   GET |   Show registered Admins   |
-|localhost:port/admins/login    |   POST    | Login as Admin account|
-|localhost:port/admins/logout   |   GET | Logout Admin account|
-|localhost:3000/merchants   | GET   |   Show registered Merchants|
-|localhost:3000/merchants/register  |   POST    |   Register Merchants|
-|localhost:3000/merchants/login/    |   POST    |   Login as Merchants|
-|localhost:3000/merchants/logout    |   GET |   Logout Merchants|
-|localhost:3000/merchants/delete-account/:id    |   DELETE  |   Delete Merchants account|
-|localhost:3000/merchants/search?q={store_name}   |   GET   |   Search Merchants Store|
-|localhost:3000/users/register  |   POST |   Register an Users account|
-|localhost:3000/users/login |   POST    |   Login as Users|
-|localhost:3000/users/logout    |   GET |   Logout from Users|
-|localhost:3000/users/delete-account/:id    |   DELETE  |   Delete Users account|
-|localhost:3000/users/search?q={username}   |   GET |   Search Users by username|
+| URL / Endpoints                                | Method | Description               |
+| ---------------------------------------------- | ------ | ------------------------- |
+| localhost:port/                                | GET    | Show API Menu             |
+| localhost:port/admins                          | GET    | Show registered Admins    |
+| localhost:port/admins/login                    | POST   | Login as Admin account    |
+| localhost:port/admins/logout                   | GET    | Logout Admin account      |
+| localhost:3000/merchants                       | GET    | Show registered Merchants |
+| localhost:3000/merchants/register              | POST   | Register Merchants        |
+| localhost:3000/merchants/login/                | POST   | Login as Merchants        |
+| localhost:3000/merchants/logout                | GET    | Logout Merchants          |
+| localhost:3000/merchants/delete-account/:id    | DELETE | Delete Merchants account  |
+| localhost:3000/merchants/search?q={store_name} | GET    | Search Merchants Store    |
+| localhost:3000/users/register                  | POST   | Register an Users account |
+| localhost:3000/users/login                     | POST   | Login as Users            |
+| localhost:3000/users/logout                    | GET    | Logout from Users         |
+| localhost:3000/users/delete-account/:id        | DELETE | Delete Users account      |
+| localhost:3000/users/search?q={username}       | GET    | Search Users by username  |
+
 ---
 
 2. Production
 
-| URL / Endpoints   | Method | Description                  |
-|-------------------|--------|------------------------------|
-|https://galonku.herokuapp.com/    |   GET  | Show API Menu                |
-|https://galonku.herokuapp.com/admins    |   GET |   Show registered Admins   |
-|https://galonku.herokuapp.com/admins/login    |   POST    | Login as Admin account|
-|https://galonku.herokuapp.com/admins/logout   |   GET | Logout Admin account|
-|https://galonku.herokuapp.com/merchants   | GET   |   Show registered Merchants|
-|https://galonku.herokuapp.com/merchants/register  |   POST    |   Register Merchants|
-|https://galonku.herokuapp.com/merchants/login/    |   POST    |   Login as Merchants|
-|https://galonku.herokuapp.com/merchants/logout    |   GET |   Logout Merchants|
-|https://galonku.herokuapp.com/merchants/delete-account/:id    |   DELETE  |   Delete Merchants account|
-|https://galonku.herokuapp.com/merchants/search?q={store_name}   |   GET   |   Search Merchants Store|
-|https://galonku.herokuapp.com/users/register  |   POST |   Register an Users account|
-|https://galonku.herokuapp.com/users/login |   POST    |   Login as Users|
-|https://galonku.herokuapp.com/users/logout    |   GET |   Logout from Users|
-|https://galonku.herokuapp.com/users/delete-account/:id    |   DELETE  |   Delete Users account|
-|https://galonku.herokuapp.com/users/search?q={username}   |   GET |   Search Users by username|
+| URL / Endpoints                                               | Method | Description               |
+| ------------------------------------------------------------- | ------ | ------------------------- |
+| https://galonku.herokuapp.com/                                | GET    | Show API Menu             |
+| https://galonku.herokuapp.com/admins                          | GET    | Show registered Admins    |
+| https://galonku.herokuapp.com/admins/login                    | POST   | Login as Admin account    |
+| https://galonku.herokuapp.com/admins/logout                   | GET    | Logout Admin account      |
+| https://galonku.herokuapp.com/merchants                       | GET    | Show registered Merchants |
+| https://galonku.herokuapp.com/merchants/register              | POST   | Register Merchants        |
+| https://galonku.herokuapp.com/merchants/login/                | POST   | Login as Merchants        |
+| https://galonku.herokuapp.com/merchants/logout                | GET    | Logout Merchants          |
+| https://galonku.herokuapp.com/merchants/delete-account/:id    | DELETE | Delete Merchants account  |
+| https://galonku.herokuapp.com/merchants/search?q={store_name} | GET    | Search Merchants Store    |
+| https://galonku.herokuapp.com/users/register                  | POST   | Register an Users account |
+| https://galonku.herokuapp.com/users/login                     | POST   | Login as Users            |
+| https://galonku.herokuapp.com/users/logout                    | GET    | Logout from Users         |
+| https://galonku.herokuapp.com/users/delete-account/:id        | DELETE | Delete Users account      |
+| https://galonku.herokuapp.com/users/search?q={username}       | GET    | Search Users by username  |
 
 ## Database Design
 
@@ -89,5 +90,43 @@ Backend section for Galonku Web application
 | createdAt | varchar(255) | NO     |       |    <null> |                |
 | updatedAt | varchar(255) | NO     |       |    <null> |                |
 +-----------+--------------+--------+-------+-----------+----------------+
+```
 
+---
+
+3. Table User
+
+```
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int(11)      | NO   | PRI | NULL    | auto_increment |
+| username     | varchar(40)  | NO   |     | NULL    |                |
+| email        | varchar(100) | NO   |     | NULL    |                |
+| password     | varchar(255) | NO   |     | NULL    |                |
+| fullname     | varchar(75)  | NO   |     | NULL    |                |
+| phone_number | varchar(30)  | NO   |     | NULL    |                |
+| address      | text         | NO   |     | NULL    |                |
+| createdAt    | varchar(255) | NO   |     | NULL    |                |
+| updatedAt    | varchar(255) | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+```
+
+---
+
+4. Table Order
+
+```
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int(11)      | NO   | PRI | NULL    | auto_increment |
+| merchant     | varchar(100) | NO   |     | NULL    |                |
+| quantity     | int(11)      | NO   |     | NULL    |                |
+| phone_number | varchar(30)  | NO   |     | NULL    |                |
+| user_address | text         | NO   |     | NULL    |                |
+| user_notes   | text         | YES  |     | NULL    |                |
+| createdAt    | varchar(255) | NO   |     | NULL    |                |
+| updatedAt    | varchar(255) | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
 ```
