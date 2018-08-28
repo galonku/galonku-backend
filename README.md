@@ -17,10 +17,8 @@ Backend section for Galonku Web application
 |-------------------|--------|------------------------------|
 |localhost:port/    |   GET  | Show API Menu                |
 |localhost:port/admins    |   GET |   Show registered Admins   |
-|localhost:port/admins/register    |   POST  | Register Admin account    |
 |localhost:port/admins/login    |   POST    | Login as Admin account|
 |localhost:port/admins/logout   |   GET | Logout Admin account|
-|localhost:port/admins/delete-account   | DELETE    | Delete Admin account
 |localhost:3000/merchants   | GET   |   Show registered Merchants|
 |localhost:3000/merchants/register  |   POST    |   Register Merchants|
 |localhost:3000/merchants/login/    |   POST    |   Login as Merchants|
@@ -40,10 +38,8 @@ Backend section for Galonku Web application
 |-------------------|--------|------------------------------|
 |https://galonku.herokuapp.com/    |   GET  | Show API Menu                |
 |https://galonku.herokuapp.com/admins    |   GET |   Show registered Admins   |
-|https://galonku.herokuapp.com/admins/register    |   POST  | Register Admin account    |
 |https://galonku.herokuapp.com/admins/login    |   POST    | Login as Admin account|
 |https://galonku.herokuapp.com/admins/logout   |   GET | Logout Admin account|
-|https://galonku.herokuapp.com/admins/delete-account   | DELETE    | Delete Admin account
 |https://galonku.herokuapp.com/merchants   | GET   |   Show registered Merchants|
 |https://galonku.herokuapp.com/merchants/register  |   POST    |   Register Merchants|
 |https://galonku.herokuapp.com/merchants/login/    |   POST    |   Login as Merchants|

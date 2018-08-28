@@ -90,14 +90,54 @@ const controller = {
             res.status(400).send({
                 message: "Username or Password is wrong"
             })
-        }
-    },
 
-    logout: async (req, res) => {
-        res.status(200).send({
-            message: "Successfully Logout!"
-        })
-    },
-}
+  updateProfile: (req, res) => {
+    const { id } = req.params;
+    const { password, email } = req.body;
 
-module.exports = controller
+    if (id) {
+      if (password && email) {
+        Admin.update(
+          {
+            password,
+            email,
+            updatedAt: new Date() + 7
+          },
+          { where: { id: id } }
+        ).then(() => {
+          res.status(200).send({
+            message: "Successfully update your profile!"
+          });
+        });
+      } else {
+        res.status(417).send({
+          message: "Please specify password field and email!"
+        });
+      }
+    } else {
+      res.status(417).send({
+        message: "Please specify Admin ID!"
+      });
+    }
+  },
+
+  logout: (req, res) => {
+    res.status(200).send({
+      message: "Successfully Logout!"
+    });
+  },
+
+  deleteAccount: (req, res) => {
+    const id = Number(req.params.id);
+    const { password } = req.body;
+    if (id) {
+      password
+        ? Admin.destroy({ where: { id: id } })
+        : res.send({ message: "Please specify the password!" });
+    } else {
+      res.status(417).send({ message: "Please specify Admin ID!" });
+    }
+  }
+};
+
+module.exports = controller;
