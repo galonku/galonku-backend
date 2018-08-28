@@ -22,9 +22,9 @@ app.use(cookieParser());
 //handle favicon.ico notfound using module serve-favicon
 app.use(favicon(path.join(__dirname, "./", "favicon.ico")));
 
-app.use("/", indexRouter);
-app.use('/admin',adminRouter)
-app.use("/merchants", merchantRouter);
+app.use('/', indexRouter)
+app.use('/admins',adminRouter)
+app.use('/merchants', merchantRouter)
 app.use("/users", userRouter);
 
 // catch 404 and forward to error handler

@@ -12,7 +12,7 @@ router.get('/', controller.show)
 router.get('/search', controller.searchMerchants)
 router.get('/login', controller.login)
 router.get('/logout', controller.logout)
-router.post('/edit-profile/:id', authToken.verifyToken, controller.editProfile)
+router.put('/edit-profile/:id', authToken.verifyToken, controller.editProfile)
 router.post('/register/', controller.register)
 router.delete('/delete-account/:id', authToken.verifyToken, controller.deleteAccount)
 

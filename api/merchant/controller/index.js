@@ -127,9 +127,9 @@ const controller = {
                                         token
                                     })
                                 } else {
-                                    res.status(417).send({
+                                   res.status(417).send({
                                         message: "Wrong Password!!"
-                                    })
+                                    }) 
                                 }
                             })
                     } else {
