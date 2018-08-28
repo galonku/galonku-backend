@@ -195,7 +195,6 @@ const controller = {
   deleteAccount: async (req, res) => {
     const id = Number(req.params.id);
     const { password } = req.body;
-    // const { password } = req.body;
     if (id) {
       User.findById(id).then(users => {
         if (users) {

@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const controller = require("./controller/index");
+const authToken = require("../auth/auth-token");
 
-router.get("/", controller.show);
-router.post("/order", controller.createOrder);
+router.get("/", authToken.verifyToken, controller.show);
+router.post("/order", authToken.verifyToken, controller.createOrder);
 
 module.exports = router;
