@@ -16,16 +16,15 @@ require('dotenv-extended').load({
     overrideProcessEnv: false
 });
 
-const environment = process.env.NODE_ENV
-let ENV
-if (environment === 'development') ENV = process.env.DEVELOPMENT_JWT_SECRET
-else if (environment === 'production') ENV = process.env.PRODUCTION_JWT_SECRET
-
 const controller = {
     show: async (req, res) => {
         Admin
-            .findAll()
-            .then(data => res.status(200).send(data))
+            .findAll({
+                attributes:['id','username','email','fullname']
+            })
+            .then(admins => res.status(200).send({
+             admins
+            }))
             .catch(err => res.status(500).send(err))
     },
 
@@ -66,7 +65,7 @@ const controller = {
                             id, fullname,
                             username, email
                         },
-                            ENV, {
+                            process.env.JWT_SECRET, {
                                 expiresIn: '1d'
                             }
                         )
