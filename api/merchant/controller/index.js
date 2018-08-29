@@ -18,7 +18,6 @@ require("dotenv-extended").load({
 });
 
 const controller = {
-<<<<<<< HEAD
     show: async (req, res, next) => {
         Merchant
             .findAll({
@@ -28,13 +27,6 @@ const controller = {
                 res.status(200).send(merchants)
             })
     },
-=======
-  show: async (req, res, next) => {
-    Merchant.findAll().then(merchants => {
-      res.status(200).send(merchants);
-    });
-  },
->>>>>>> 35f18b3afb166063b0889936e63c81737aa1daa9
 
   searchMerchants: async (req, res) => {
     const keyword = req.query.q;
@@ -131,26 +123,6 @@ const controller = {
     }
   },
 
-<<<<<<< HEAD
-                        bcrypt
-                            .compare(password, merchant.password)
-                            .then(response => {
-                                if (response) {
-                                    res.status(200).send({
-                                        message: "Login successful",
-                                        token
-                                    })
-                                } else {
-                                    res.status(417).send({
-                                        message: "Wrong Password!!"
-                                    })
-                                }
-                            })
-                    } else {
-                        res.status(404).send({ message: "Sorry, username and password doesnt exist. Please register before login!" })
-                    }
-                })
-=======
   login: async (req, res) => {
     const { username, password } = req.body;
     if (username && password) {
@@ -193,7 +165,6 @@ const controller = {
               });
             }
           });
->>>>>>> 35f18b3afb166063b0889936e63c81737aa1daa9
         } else {
           res.status(404).send({
             message:
@@ -216,33 +187,6 @@ const controller = {
     const id = req.params.id;
     const { password, store_name, address, email, phone_number } = req.body;
 
-<<<<<<< HEAD
-        if (id) {
-            Merchant.findById(id)
-                .then(merchant => {
-                    if (merchant) {
-                        const saltRounds = 5
-                        bcrypt.hash(password, saltRounds)
-                            .then(hash => {
-                                return {
-                                    store_name, email, password: hash,
-                                    phone_number, address,
-                                    createdAt: new Date() + 7,
-                                    updatedAt: new Date() + 7
-                                }
-                            }).then(updatedMerchants => {
-                                Merchant.update(
-                                    updatedMerchants
-                                    , { where: { id: id } })
-                                    .then(() => {
-                                        res.status(200).send({ message: "Updating success" })
-                                    })
-                            })
-                    }
-                })
-        } else res.status(417).send({ message: "Please specify Merchant ID then input your account password!" })
-    },
-=======
     if (id) {
       Merchant.findById(id).then(merchant => {
         if (merchant) {
@@ -274,7 +218,6 @@ const controller = {
         message: "Please specify Merchant ID then input your account password!"
       });
   },
->>>>>>> 35f18b3afb166063b0889936e63c81737aa1daa9
 
   deleteAccount: async (req, res) => {
     const id = Number(req.params.id);
