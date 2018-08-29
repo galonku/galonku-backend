@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('merchants', {
+    return queryInterface.createTable("merchants", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -34,12 +34,17 @@ module.exports = {
       },
       identity_number: {
         allowNull: false,
-        unique: true,        
+        unique: true,
         type: Sequelize.STRING(20)
       },
       address: {
         allowNull: false,
         type: Sequelize.TEXT
+      },
+      status: {
+        allowNull: false,
+        type: Sequelize.ENUM("pending", "verified"),
+        defaultValue: "pending"
       },
       createdAt: {
         allowNull: false,
@@ -52,6 +57,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('merchants');
+    return queryInterface.dropTable("merchants");
   }
 };
