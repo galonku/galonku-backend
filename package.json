@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setup":"./setup.sh && yarn migrate",
+    "setup":"yarn && yarn migrate",
     "setup:undo": "yarn migrate:undo",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
@@ -12,7 +12,7 @@
     "migrate:production:undo": "sequelize db:seed:undo:all --env production && sequelize db:migrate:undo:all --env production",
     "migrate:test": "sequelize db:migrate --env test",
     "migrate:test:undo": "sequelize db:migrate:undo:all --env test",
-    "start":"yarn setup && node index",
+    "start":"node index",
     "dev": "node-dev ./index",
     "seed:all": "sequelize db:seed:all",
     "seed:undo": "sequelize db:seed:undo:all"
