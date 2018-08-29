@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const models = require("../../../models/index");
 const User = models.user;
-const Logging = models.logging;
+// const Logging = models.logging;
 
 const controller = {
   show: (req, res) => {
@@ -126,8 +126,10 @@ const controller = {
                   expiresIn: "12h"
                 }
               );
+
               res.status(200).send({
                 message: "User session",
+                role: "user",
                 token
               });
               return Logging.create({

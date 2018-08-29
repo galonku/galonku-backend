@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const models = require("../../../models/index");
 const Merchant = models.merchant;
+const Logging = models.logging;
 
 const controller = {
   valid: async (req, res) => {
@@ -20,7 +21,20 @@ const controller = {
           });
         } else {
           req.decoded = decoded;
+          // let role = decoded.role;
+          // res.status(200).send({
+          //   message: `${role} session`,
+          //   role
+          // });
           next();
+          // Logging.findOne({ where: { token: token } }).then(verified => {
+          //   // const { id } = verified;
+          //   if (verified) {
+          // id
+          //   } else {
+          //     next();
+          //   }
+          // });
         }
       });
     } else {
