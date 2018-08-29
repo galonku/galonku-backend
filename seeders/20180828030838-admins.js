@@ -1,9 +1,11 @@
 'use strict';
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
-const myPassword = 'superpower';
-const myPassword2 = 'tes123';
+const myPassword = process.env.ADMIN_PASSWORD
+const myPassword2 = process.env.ADMIN_PASSWORD2
 
+console.log(myPassword)
+console.log(myPassword2)
 const doEncryptPassword = (textPassword, salt = 5) => {
   return new Promise((resolve, reject) => {
     bcrypt.hash(myPassword, salt).then(result => {
