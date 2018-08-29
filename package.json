@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start":"node index",
-    "dev": "node-dev ./index",
-    "seed:all": "sequelize db:seed:all",
-    "seed:undo": "sequelize db:seed:undo:all",
+    "setup":"./setup.sh && yarn migrate",
+    "setup:undo": "yarn migrate:undo",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
-    "migrate:undo:all": "sequelize db:migrate:undo:all"
+    "migrate:undo:all": "sequelize db:migrate:undo:all",
+    "migrate:production": "sequelize db:migrate --env production && sequelize db:seed:all --env production",
+    "migrate:production:undo": "sequelize db:seed:undo:all --env production && sequelize db:migrate:undo:all --env production",
+    "migrate:test": "sequelize db:migrate --env test",
+    "migrate:test:undo": "sequelize db:migrate:undo:all --env test",
+    "start":"yarn setup && node index",
+    "dev": "node-dev ./index",
+    "seed:all": "sequelize db:seed:all",
+    "seed:undo": "sequelize db:seed:undo:all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
