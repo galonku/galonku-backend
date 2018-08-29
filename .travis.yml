@@ -6,7 +6,9 @@ before_install:
 before_script:
   - greenkeeper-lockfile-update
   - yarn
-  - yarn migrate:test
+  - yarn migrate:
+script:
+  - yarn test
 after_script:
   - greenkeeper-lockfile-upload
   - yarn migrate:test:undo
