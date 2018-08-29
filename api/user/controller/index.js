@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const models = require("../../../models/index");
 const User = models.user;
-
+const Logging = models.logging;
 
 const controller = {
   show: (req, res) => {
@@ -114,22 +114,33 @@ const controller = {
         }
       }).then(user => {
         if (user) {
-          const token = jwt.sign(
-            {
-              username,
-              fullname: user.fullname
-            },
-            process.env.JWT_SECRET,
-            {
-              expiresIn: "12h"
-            }
-          );
-
           bcrypt.compare(password, user.password).then(response => {
             if (response) {
+              const token = jwt.sign(
+                {
+                  username,
+                  role: "user"
+                },
+                process.env.JWT_SECRET,
+                {
+                  expiresIn: "12h"
+                }
+              );
+
               res.status(200).send({
-                message: "Login successful",
+                message: "User session",
+                role: "user",
                 token
+              });
+              return Logging.create({
+                iduser: user.id,
+                username: user.username,
+                role: "user",
+                token,
+                createdAt: new Date() + 7,
+                updatedAt: new Date() + 7
+              }).then(newLog => {
+                Logging.build(newLog);
               });
             } else {
               res.status(417).send({
