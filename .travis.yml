@@ -6,6 +6,7 @@ before_install:
 before_script:
   - greenkeeper-lockfile-update
   - yarn
+  - yarn add --dev sequelize
   - yarn migrate:test
 script: yarn test
 after_script:
