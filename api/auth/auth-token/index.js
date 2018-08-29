@@ -11,7 +11,7 @@ const controller = {
                 const token = req.headers.authorization.split(' ')[1] || ''
                 jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
                     if (error) {
-                        res.send(417).send({
+                        res.status(417).send({
                             message: "Token is invalid"
                         })
                     }else{
