@@ -18,11 +18,15 @@ require("dotenv-extended").load({
 });
 
 const controller = {
-  show: async (req, res, next) => {
-    Merchant.findAll().then(merchants => {
-      res.status(200).send(merchants);
-    });
-  },
+    show: async (req, res, next) => {
+        Merchant
+            .findAll({
+                attributes: ['id', 'username', 'store_name', 'email', 'phone_number', 'address']
+            })
+            .then(merchants => {
+                res.status(200).send(merchants)
+            })
+    },
 
   searchMerchants: async (req, res) => {
     const keyword = req.query.q;
