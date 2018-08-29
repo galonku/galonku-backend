@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       user_notes: DataTypes.TEXT,
       status: {
         allowNull: false,
-        type: DataTypes.ENUM("process", "done")
+        type: DataTypes.ENUM("pending", "process", "done")
       }
     },
     {}
