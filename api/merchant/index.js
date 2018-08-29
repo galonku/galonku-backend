@@ -10,7 +10,7 @@ router.get("/verifytoken", authToken.verifyToken, authToken.valid);
 
 router.get("/", controller.show);
 router.get("/search", controller.searchMerchants);
-router.post("/login", controller.login);
+router.post("/login", authToken.verifyLogin, controller.login);
 router.get("/logout", controller.logout);
 router.put(
   "/edit-profile/:id",

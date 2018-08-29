@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const models = require("../../../models/index");
 const Merchant = models.merchant;
-// const Logging = models.logging;
+const Logging = models.logging;
 
 require("dotenv-extended").load({
   encoding: "utf8",
