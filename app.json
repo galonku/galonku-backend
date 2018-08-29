@@ -1,0 +1,14 @@
+{
+      "name": "galonku-backend",
+      "description": "Backend section for Galonku Web application",
+      "repository": "git@github.com:andromedaorg/galonku-backend.git",
+    "keywords": [
+        "database",
+        "sequelize",
+        "orm",
+        "application", 
+        "api", 
+        "web"
+    ],
+    "image": "heroku/nodejs"
+  }
