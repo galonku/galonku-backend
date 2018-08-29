@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setup":"yarn migrate",
+    "setup":"yarn && yarn migrate",
     "setup:undo": "yarn migrate:undo",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
