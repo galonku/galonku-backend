@@ -19,7 +19,9 @@ require('dotenv-extended').load({
 const controller = {
     show: async (req, res, next) => {
         Merchant
-            .findAll()
+            .findAll({
+                attributes: ['id', 'username', 'store_name', 'email', 'phone_number', 'address']
+            })
             .then(merchants => {
                 res.status(200).send(merchants)
             })
@@ -122,9 +124,9 @@ const controller = {
                                         token
                                     })
                                 } else {
-                                   res.status(417).send({
+                                    res.status(417).send({
                                         message: "Wrong Password!!"
-                                    }) 
+                                    })
                                 }
                             })
                     } else {
@@ -154,7 +156,7 @@ const controller = {
                         bcrypt.hash(password, saltRounds)
                             .then(hash => {
                                 return {
-                                    store_name,email, password: hash,
+                                    store_name, email, password: hash,
                                     phone_number, address,
                                     createdAt: new Date() + 7,
                                     updatedAt: new Date() + 7
@@ -162,7 +164,7 @@ const controller = {
                             }).then(updatedMerchants => {
                                 Merchant.update(
                                     updatedMerchants
-                                , { where: { id: id } })
+                                    , { where: { id: id } })
                                     .then(() => {
                                         res.status(200).send({ message: "Updating success" })
                                     })
