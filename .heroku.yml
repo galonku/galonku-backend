@@ -1,0 +1,9 @@
+build:
+  languages:
+    - nodejs
+  pre:
+    - yarn migrate
+  post:
+    - echo 'app installed'
+run:
+  web: yarn start

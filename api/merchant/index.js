@@ -12,8 +12,8 @@ router.get('/', controller.show)
 router.get('/search', controller.searchMerchants)
 router.post('/login', controller.login)
 router.get('/logout', controller.logout)
-router.put('/edit-profile/:id', authToken.verifyToken, controller.editProfile)
+router.put('/edit-profile/:id', authToken.verifyTokenAsMerchants, controller.editProfile)
 router.post('/register/', controller.register)
-router.delete('/delete-account/:id', authToken.verifyToken, controller.deleteAccount)
+router.delete('/delete-account/:id', authToken.verifyTokenAsMerchants, controller.deleteAccount)
 
 module.exports = router;

@@ -4,10 +4,6 @@ const jwt = require("jsonwebtoken");
 const models = require("../../../models/index");
 const User = models.user;
 
-const environment = process.env.NODE_ENV;
-let ENV;
-if (environment === "development") ENV = process.env.DEVELOPMENT_JWT_SECRET;
-else if (environment === "production") ENV = process.env.JWT_SECRET;
 
 const controller = {
   show: (req, res) => {
@@ -123,7 +119,7 @@ const controller = {
               username,
               fullname: user.fullname
             },
-            ENV,
+            process.env.JWT_SECRET,
             {
               expiresIn: "12h"
             }
@@ -137,7 +133,7 @@ const controller = {
               });
             } else {
               res.status(417).send({
-                message: "Wrong credentials"
+                message: "Wrong Password!!"
               });
             }
           });
