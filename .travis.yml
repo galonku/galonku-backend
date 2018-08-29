@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - '>=8'
 before_install:
-  - yarn global add greenkeeper-lockfile@1 sequelize
+  - yarn global add greenkeeper-lockfile@1 sequelize-cli
 before_script:
   - greenkeeper-lockfile-update
   - yarn
