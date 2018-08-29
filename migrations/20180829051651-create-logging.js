@@ -20,6 +20,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.ENUM("user", "merchant", "admin")
       },
+      token: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

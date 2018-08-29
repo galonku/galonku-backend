@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const models = require("../../../models/index");
 const Merchant = models.merchant;
+const Logging = models.logging;
 
 require("dotenv-extended").load({
   encoding: "utf8",
@@ -127,22 +128,31 @@ const controller = {
         }
       }).then(merchant => {
         if (merchant) {
-          const token = jwt.sign(
-            {
-              username,
-              store_name: merchant.store_name
-            },
-            process.env.JWT_SECRET,
-            {
-              expiresIn: "12h"
-            }
-          );
-
           bcrypt.compare(password, merchant.password).then(response => {
             if (response) {
+              const token = jwt.sign(
+                {
+                  username,
+                  role: "merchant"
+                },
+                process.env.JWT_SECRET,
+                {
+                  expiresIn: "12h"
+                }
+              );
               res.status(200).send({
-                message: "Login successful",
+                message: "Merchant session",
                 token
+              });
+              return Logging.create({
+                iduser: merchant.id,
+                username: merchant.username,
+                role: "merchant",
+                token,
+                createdAt: new Date() + 7,
+                updatedAt: new Date() + 7
+              }).then(newLog => {
+                Logging.build(newLog);
               });
             } else {
               res.status(417).send({
