@@ -16,11 +16,6 @@ require('dotenv-extended').load({
     overrideProcessEnv: false
 });
 
-const environment = process.env.NODE_ENV
-let ENV
-if (environment === 'development') ENV = process.env.DEVELOPMENT_JWT_SECRET
-else if (environment === 'production') ENV = process.env.PRODUCTION_JWT_SECRET
-
 const controller = {
     show: async (req, res, next) => {
         Merchant
@@ -114,7 +109,7 @@ const controller = {
                         const token = jwt.sign({
                             username, store_name: merchant.store_name
                         },
-                            ENV, {
+                            process.env.JWT_SECRET, {
                                 expiresIn: '12h'
                             })
 
