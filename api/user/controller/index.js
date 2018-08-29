@@ -130,6 +130,7 @@ const controller = {
               res.status(200).send({
                 message: "User session",
                 role: "user",
+                username,
                 token
               });
               return Logging.create({
