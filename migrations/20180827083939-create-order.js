@@ -13,22 +13,29 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       merchant: {
+        allowNull: false,
         type: Sequelize.STRING(100)
       },
       quantity: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       phone_number: {
+        allowNull: false,
         type: Sequelize.STRING(30)
       },
       user_address: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       user_notes: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       status: {
-        type: Sequelize.ENUM("process", "done")
+        allowNull: false,
+        type: Sequelize.ENUM("process", "done"),
+        defaultValue: "process"
       },
       createdAt: {
         allowNull: false,
