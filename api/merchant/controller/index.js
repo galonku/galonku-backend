@@ -68,7 +68,6 @@ const controller = {
       password,
       phone_number,
       identity_number,
-      price,
       address
     } = req.body;
     if (
@@ -78,7 +77,6 @@ const controller = {
       password &&
       phone_number &&
       identity_number &&
-      price &&
       address
     ) {
       const saltRounds = 5;
@@ -92,7 +90,7 @@ const controller = {
             password: hash,
             phone_number,
             identity_number,
-            price,
+            price: "0",
             address,
             status: "pending",
             createdAt: new Date() + 7,
@@ -108,7 +106,6 @@ const controller = {
                 store_name,
                 email,
                 address,
-                price,
                 status,
                 createdAt
               } = merchants;
@@ -119,7 +116,6 @@ const controller = {
                   store_name,
                   email,
                   address,
-                  price,
                   status,
                   createdAt
                 }
