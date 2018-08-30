@@ -6,7 +6,7 @@ const authToken = require("../auth/auth-token");
 // const authPassword = require('../')
 
 /* GET home page. */
-router.get("/verifytoken", authToken.verifyToken, authToken.valid);
+router.get("/verifytoken", authToken.verifyTokenAsMerchants, authToken.valid);
 
 router.get("/", controller.show);
 router.get("/search", controller.searchMerchants);

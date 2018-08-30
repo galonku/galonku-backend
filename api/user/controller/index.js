@@ -7,7 +7,9 @@ const Logging = models.logging;
 
 const controller = {
   show: (req, res) => {
-    User.findAll({ attributes: { exclude: ['password'] } }).then(data => res.status(200).send(data));
+    User.findAll({ attributes: { exclude: ["password"] } }).then(data =>
+      res.status(200).send(data)
+    );
   },
 
   searchUser: async (req, res) => {
@@ -17,13 +19,13 @@ const controller = {
 
     if (keyword) {
       User.findAll({
-        attributes:{
-          exclude:['password']
+        attributes: {
+          exclude: ["password"]
         },
         where: {
           username: {
             [op.like]: `%${keyword}%`
-          }  
+          }
         }
       }).then(user => {
         if (user) {

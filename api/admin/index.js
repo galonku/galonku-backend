@@ -1,13 +1,13 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const controller = require('./controller/index')
-const authToken = require('../auth/auth-token')
+const controller = require("./controller/index");
+const authToken = require("../auth/auth-token");
 
-router.get('/verifytoken', authToken.verifyToken),
+router.get("/verifytoken", authToken.verifyTokenAsAdmin, authToken.valid);
+router.get("/", authToken.verifyTokenAsAdmin, controller.show);
+router.post("/login", authToken.verifyLogin, controller.login);
+router.post("/register", controller.register);
+router.get("/logout", controller.logout);
 
-router.get('/', authToken.verifyToken, controller.show)
-router.post('/login',controller.login)
-router.get('/logout',controller.logout)
-
-module.exports = router
+module.exports = router;
