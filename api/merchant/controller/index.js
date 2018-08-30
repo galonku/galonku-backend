@@ -26,7 +26,8 @@ const controller = {
         "store_name",
         "email",
         "phone_number",
-        "address"
+        "address",
+        "price"
       ]
     }).then(merchants => {
       res.status(200).send(merchants);
@@ -107,6 +108,7 @@ const controller = {
                 store_name,
                 email,
                 address,
+                price,
                 status,
                 createdAt
               } = merchants;
@@ -117,6 +119,7 @@ const controller = {
                   store_name,
                   email,
                   address,
+                  price,
                   status,
                   createdAt
                 }
