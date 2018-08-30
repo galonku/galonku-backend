@@ -15,7 +15,7 @@
     "start": "node index",
     "test": "jest",
     "dev": "node-dev ./index",
-    "seed:all": "sequelize db:seed:all",
+    "seed:all": "sequelize db:seed:all --env test",
     "seed:undo": "sequelize db:seed:undo:all"
   },
   "dependencies": {

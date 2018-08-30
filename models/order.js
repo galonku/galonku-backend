@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING(100)
       },
+      idmerchants: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+      },
       quantity: {
         allowNull: false,
         type: DataTypes.INTEGER
