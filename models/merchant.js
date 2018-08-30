@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
         isNumeric: true,
         type: DataTypes.STRING(20)
       },
+      price: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+      },
       address: {
         allowNull: false,
         type: DataTypes.TEXT

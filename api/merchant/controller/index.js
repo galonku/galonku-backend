@@ -18,15 +18,20 @@ require("dotenv-extended").load({
 });
 
 const controller = {
-    show: async (req, res, next) => {
-        Merchant
-            .findAll({
-                attributes: ['id', 'username', 'store_name', 'email', 'phone_number', 'address']
-            })
-            .then(merchants => {
-                res.status(200).send(merchants)
-            })
-    },
+  show: async (req, res, next) => {
+    Merchant.findAll({
+      attributes: [
+        "id",
+        "username",
+        "store_name",
+        "email",
+        "phone_number",
+        "address"
+      ]
+    }).then(merchants => {
+      res.status(200).send(merchants);
+    });
+  },
 
   searchMerchants: async (req, res) => {
     const keyword = req.query.q;
@@ -62,6 +67,7 @@ const controller = {
       password,
       phone_number,
       identity_number,
+      price,
       address
     } = req.body;
     if (
@@ -71,6 +77,7 @@ const controller = {
       password &&
       phone_number &&
       identity_number &&
+      price &&
       address
     ) {
       const saltRounds = 5;
@@ -84,6 +91,7 @@ const controller = {
             password: hash,
             phone_number,
             identity_number,
+            price,
             address,
             status: "pending",
             createdAt: new Date() + 7,
@@ -120,6 +128,10 @@ const controller = {
               });
             });
         });
+    } else {
+      res.status(417).send({
+        message: "please fill all data"
+      });
     }
   },
 
@@ -185,7 +197,14 @@ const controller = {
 
   editProfile: async (req, res) => {
     const id = req.params.id;
-    const { password, store_name, address, email, phone_number } = req.body;
+    const {
+      password,
+      store_name,
+      address,
+      email,
+      phone_number,
+      price
+    } = req.body;
 
     if (id) {
       Merchant.findById(id).then(merchant => {
@@ -199,6 +218,7 @@ const controller = {
                 email,
                 password: hash,
                 phone_number,
+                price,
                 address,
                 createdAt: new Date() + 7,
                 updatedAt: new Date() + 7
