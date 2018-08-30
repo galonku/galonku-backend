@@ -9,41 +9,7 @@ Backend section for Galonku Web application
 
 ## API Endpoint
 
-1.  Development
-
 _Note: Some URL/Endpoint is still under development_
-
-| URL / Endpoints                                | Method | Description                |
-| ---------------------------------------------- | ------ | -------------------------- |
-| localhost:port/                                | GET    | Show API Menu              |
-| localhost:port/admins                          | GET    | Show registered Admins     |
-| localhost:port/admins/login                    | POST   | Login as Admin account     |
-| localhost:port/admins/logout                   | GET    | Logout Admin account       |
-| localhost:port/admins/verifytoken              | GET    | Verify Admin token         |
-| localhost:3000/merchants                       | GET    | Show registered Merchants  |
-| localhost:3000/merchants/register              | POST   | Register Merchants         |
-| localhost:3000/merchants/login/                | POST   | Login as Merchants         |
-| localhost:3000/merchants/logout                | GET    | Logout Merchants           |
-| localhost:port/merchants/verifytoken           | GET    | Verify Merchants token     |
-| localhost:3000/merchants/search?q={store_name} | GET    | Search Merchants Store     |
-| localhost:3000/merchants/edit-profile/id       | PUT    | Update profile Merchants   |
-| localhost:3000/merchants/reviews               | GET    | Show Merchants review      |
-| localhost:3000/merchants/add-reviews           | POST   | Add Merchants review       |
-| localhost:3000/users                           | GET    | Show registered Users      |
-| localhost:3000/users/register                  | POST   | Register an Users account  |
-| localhost:3000/users/login                     | POST   | Login as Users             |
-| localhost:3000/users/verifylogin               | GET    | Verify Users login session |
-| localhost:3000/users/logout                    | GET    | Logout from Users          |
-| localhost:3000/users/verifytoken               | GET    | Verify Users Token         |
-| localhost:3000/users/edit-profile/:id          | PUT    | Edit Users profile         |
-| localhost:3000/users/delete-account/:id        | DELETE | Delete Users account       |
-| localhost:3000/users/search?q={username}       | GET    | Search Users by username   |
-| localhost:3000/orders/                         | GET    | Get orders                 |
-| localhost:3000/orders/order                    | POST   | Create order               |
-
-* * *
-
-2.  Production
 
 | URL / Endpoints                                                 | Method | Description               |
 | --------------------------------------------------------------- | ------ | ------------------------- |
@@ -51,16 +17,22 @@ _Note: Some URL/Endpoint is still under development_
 | <https://galonku.herokuapp.com/admins>                          | GET    | Show registered Admins    |
 | <https://galonku.herokuapp.com/admins/login>                    | POST   | Login as Admin account    |
 | <https://galonku.herokuapp.com/admins/logout>                   | GET    | Logout Admin account      |
-| <https://galonku.herokuapp.com/admins/verifytoken>              | GET    | Logout Admin account      |
+| <https://galonku.herokuapp.com/admins/verifytoken>              | GET    | Verify Admin token        |
 | <https://galonku.herokuapp.com/merchants>                       | GET    | Show registered Merchants |
 | <https://galonku.herokuapp.com/merchants/register>              | POST   | Register Merchants        |
 | <https://galonku.herokuapp.com/merchants/login/>                | POST   | Login as Merchants        |
 | <https://galonku.herokuapp.com/merchants/logout>                | GET    | Logout Merchants          |
+| <https://galonku.herokuapp.com/merchants/verifytoken>           | GET    | Verify Merchants token    |
 | <https://galonku.herokuapp.com/merchants/search?q={store_name}> | GET    | Search Merchants Store    |
+| <https://galonku.herokuapp.com/merchants/edit-profile/id>       | PUT    | Update profile Merchants  |
+| <https://galonku.herokuapp.com/merchants/reviews>               | GET    | Show Merchants review     |
+| <https://galonku.herokuapp.com/merchants/add-reviews>           | POST   | Add Merchants review      |
 | <https://galonku.herokuapp.com/users>                           | GET    | Show registered Users     |
 | <https://galonku.herokuapp.com/users/register>                  | POST   | Register an Users account |
 | <https://galonku.herokuapp.com/users/login>                     | POST   | Login as Users            |
 | <https://galonku.herokuapp.com/users/logout>                    | GET    | Logout from Users         |
+| <https://galonku.herokuapp.com/users/verifytoken>               | GET    | Verify Users Token        |
+| <https://galonku.herokuapp.com/users/edit-profile/:id>          | PUT    | Edit Users profile        |
 | <https://galonku.herokuapp.com/users/delete-account/:id>        | DELETE | Delete Users account      |
 | <https://galonku.herokuapp.com/users/search?q={username}>       | GET    | Search Users by username  |
 | <https://galonku.herokuapp.com/orders/>                         | GET    | Get orders                |
