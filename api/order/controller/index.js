@@ -25,7 +25,7 @@ const controller = {
           Vieworder.findAll({
             attributes: [
               "fullname",
-              "user_address",
+              "address",
               "phone number",
               "notes",
               "store_name",
