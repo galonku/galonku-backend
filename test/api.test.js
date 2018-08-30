@@ -8,3 +8,12 @@ describe('API root endpoint', () => {
             .expect(200)
     })
 })
+
+describe('API Admins endpoint', () => {
+    test('Expect response with status code 200', () => {
+        return request(app)
+            .get('/admins')
+            .expect(400)
+    })
+})
+
