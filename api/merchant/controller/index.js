@@ -147,11 +147,13 @@ const controller = {
         }
       }).then(merchant => {
         if (merchant) {
+          const mstore_name = merchant.store_name;
           bcrypt.compare(password, merchant.password).then(response => {
             if (response) {
               const token = jwt.sign(
                 {
                   username,
+                  mstore_name,
                   role: "merchant"
                 },
                 process.env.JWT_SECRET,
@@ -162,6 +164,8 @@ const controller = {
               res.status(200).send({
                 message: "Merchant session",
                 role: "merchant",
+                username,
+                mstore_name,
                 token
               });
               return Logging.create({
