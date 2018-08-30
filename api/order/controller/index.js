@@ -12,6 +12,7 @@ const controller = {
   createOrder: (req, res) => {
     const {
       iduser,
+      idmerchants,
       merchant,
       quantity,
       phone_number,
@@ -23,6 +24,7 @@ const controller = {
         if (user) {
           return Order.create({
             iduser,
+            idmerchants,
             merchant,
             quantity,
             phone_number,

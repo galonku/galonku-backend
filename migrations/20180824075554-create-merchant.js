@@ -37,6 +37,10 @@ module.exports = {
         unique: true,
         type: Sequelize.STRING(20)
       },
+      price: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       address: {
         allowNull: false,
         type: Sequelize.TEXT
