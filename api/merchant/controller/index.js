@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const models = require("../../../models/index");
 const Merchant = models.merchant;
 const Logging = models.logging;
+const Review = models.review
 
 require("dotenv-extended").load({
   encoding: "utf8",
@@ -18,15 +19,15 @@ require("dotenv-extended").load({
 });
 
 const controller = {
-    show: async (req, res, next) => {
-        Merchant
-            .findAll({
-                attributes: ['id', 'username', 'store_name', 'email', 'phone_number', 'address']
-            })
-            .then(merchants => {
-                res.status(200).send(merchants)
-            })
-    },
+  show: async (req, res, next) => {
+    Merchant
+      .findAll({
+        attributes: ['id', 'username', 'store_name', 'email', 'phone_number', 'address']
+      })
+      .then(merchants => {
+        res.status(200).send(merchants)
+      })
+  },
 
   searchMerchants: async (req, res) => {
     const keyword = req.query.q;
@@ -133,6 +134,7 @@ const controller = {
       }).then(merchant => {
         if (merchant) {
           bcrypt.compare(password, merchant.password).then(response => {
+            const { id } = merchant
             if (response) {
               const token = jwt.sign(
                 {
@@ -147,10 +149,12 @@ const controller = {
               res.status(200).send({
                 message: "Merchant session",
                 role: "merchant",
+                id,
+                username,
                 token
               });
               return Logging.create({
-                iduser: merchant.id,
+                iduser: id,
                 username: merchant.username,
                 role: "merchant",
                 token,
@@ -245,6 +249,24 @@ const controller = {
       res.status(417).send({
         message: "Please specify Merchant ID then input your account password!"
       });
+  },
+
+  showReviews: async (req, res) => {
+    Review.findAll().then(data => { res.status(200).send({ data }) })
+  },
+
+  addReviews: async (req, res) => {
+    const { comments, store_name, username } = req.body
+    Review.build({
+      comments, store_name, username,
+      createdAt: new Date() + 7,
+      updatedAt: new Date() + 7
+    })
+      .save()
+      .then(newReviews => {
+        res.status(200).send({ newReviews })
+      })
+      .catch(err => res.status(500).send(err))
   }
 };
 
