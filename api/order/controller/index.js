@@ -1,12 +1,52 @@
 const models = require("../../../models/index");
+const jwt = require("jsonwebtoken");
 const Order = models.order;
 const User = models.user;
+const Vieworder = models.vieworder;
 
 const controller = {
   show: (req, res) => {
-    Order.findAll().then(data => {
-      res.status(200).send(data);
-    });
+    const sequelize = require("sequelize");
+    const op = sequelize.Op;
+    const DevToken =
+      req.headers.authorization &&
+      req.headers.authorization.split(" ")[0] === "Bearer";
+    if (DevToken) {
+      const token = req.headers.authorization.split(" ")[1] || "";
+      jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+        if (error) {
+          res.status(417).send({
+            message: "Token is invalid"
+          });
+        } else {
+          req.decoded = decoded;
+          let fullname = decoded.ufullname;
+          let store_name = decoded.mstore_name;
+          Vieworder.findAll({
+            attributes: [
+              "fullname",
+              "address",
+              "phone number",
+              "notes",
+              "store_name",
+              "price",
+              "quantity",
+              "Total",
+              "status"
+            ],
+            where: {
+              [op.or]: [{ fullname: fullname }, { store_name: store_name }]
+            }
+          }).then(data => {
+            res.status(200).send(data);
+          });
+        }
+      });
+    } else {
+      res.status(400).send({
+        message: "Please specify your Developer token in request headers"
+      });
+    }
   },
 
   createOrder: (req, res) => {

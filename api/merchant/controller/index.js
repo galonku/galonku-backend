@@ -69,7 +69,6 @@ const controller = {
       password,
       phone_number,
       identity_number,
-      price,
       address
     } = req.body;
     if (
@@ -79,7 +78,6 @@ const controller = {
       password &&
       phone_number &&
       identity_number &&
-      price &&
       address
     ) {
       const saltRounds = 5;
@@ -93,7 +91,7 @@ const controller = {
             password: hash,
             phone_number,
             identity_number,
-            price,
+            price: "0",
             address,
             status: "pending",
             createdAt: new Date() + 7,
@@ -109,7 +107,6 @@ const controller = {
                 store_name,
                 email,
                 address,
-                price,
                 status,
                 createdAt
               } = merchants;
@@ -120,7 +117,6 @@ const controller = {
                   store_name,
                   email,
                   address,
-                  price,
                   status,
                   createdAt
                 }
@@ -148,12 +144,14 @@ const controller = {
         }
       }).then(merchant => {
         if (merchant) {
+          const mstore_name = merchant.store_name;
           bcrypt.compare(password, merchant.password).then(response => {
             const { id } = merchant
             if (response) {
               const token = jwt.sign(
                 {
                   username,
+                  mstore_name,
                   role: "merchant"
                 },
                 process.env.JWT_SECRET,
@@ -164,8 +162,8 @@ const controller = {
               res.status(200).send({
                 message: "Merchant session",
                 role: "merchant",
-                id,
                 username,
+                mstore_name,
                 token
               });
               return Logging.create({

@@ -119,12 +119,14 @@ const controller = {
         }
       }).then(user => {
         if (user) {
+          const ufullname = user.fullname;
           bcrypt.compare(password, user.password).then(response => {
             const { id }= user
             if (response) {
               const token = jwt.sign(
                 {
                   username,
+                  ufullname,
                   role: "user"
                 },
                 process.env.JWT_SECRET,
@@ -138,6 +140,7 @@ const controller = {
                 role: "user",
                 id,
                 username,
+                ufullname,
                 token
               });
               return Logging.create({
