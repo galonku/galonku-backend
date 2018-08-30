@@ -9,13 +9,13 @@ router.get("/verifylogin", authToken.verifyLogin);
 
 router.get("/", authToken.verifyTokenAsUser, controller.show);
 router.get("/search", authToken.verifyToken, controller.searchUser);
+router.post("/login", authToken.verifyLogin, controller.login);
 router.get("/logout", controller.logout);
 router.put(
   "/edit-profile/:id",
   authToken.verifyTokenAsUser,
   controller.updateProfile
 );
-router.post("/login", authToken.verifyLogin, controller.login);
 router.post("/register", controller.register);
 router.delete(
   "/delete-account/:id",
