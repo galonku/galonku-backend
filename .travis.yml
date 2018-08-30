@@ -11,6 +11,7 @@ script: yarn test
 after_script:
   - greenkeeper-lockfile-upload
   - yarn migrate:test:undo
+  - yarn seed:all
 cache:
   yarn: true
   directories:
