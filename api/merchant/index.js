@@ -24,7 +24,7 @@ router.delete(
   controller.deleteAccount
 );
 
-router.get('/reviews',controller.showReviews)
-router.post('/add-reviews',controller.addReviews)
+router.get('/reviews', authToken.verifyTokenAsMerchants, controller.showReviews)
+router.post('/add-reviews', authToken.verifyTokenAsUser, controller.addReviews)
 
 module.exports = router;
