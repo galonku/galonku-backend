@@ -18,11 +18,6 @@ router.put(
   controller.editProfile
 );
 router.post("/register/", controller.register);
-router.delete(
-  "/delete-account/:id",
-  authToken.verifyTokenAsMerchants,
-  controller.deleteAccount
-);
 
 router.get('/reviews', authToken.verifyTokenAsMerchants, controller.showReviews)
 router.post('/add-reviews', authToken.verifyTokenAsUser, controller.addReviews)
