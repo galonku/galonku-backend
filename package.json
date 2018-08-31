@@ -18,7 +18,8 @@
     "migrate:test": "sequelize db:migrate --env test",
     "migrate:test:undo": "sequelize db:migrate:undo:all --env test",
     "start": "node index",
-    "test": "jest test",
+    "test": "jest test --forceExit",
+    "test:debug": "jest test --detectOpenHandles --forceExit",
     "dev": "node-dev ./index",
     "seed:all": "sequelize db:seed:all --env test",
     "seed:undo": "sequelize db:seed:undo:all"
