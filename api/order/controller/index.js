@@ -44,7 +44,7 @@ const controller = {
       });
     } else {
       res.status(400).send({
-        message: "Please specify your Developer token in request headers"
+        message: "Please specify the token in request headers"
       });
     }
   },
@@ -91,7 +91,7 @@ const controller = {
         }
       });
     } else {
-      res.status(417).send({ message: "Please fill all parameters" });
+      res.status(417).send({ message: "Please fill all fields" });
     }
   }
 };
