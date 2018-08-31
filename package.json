@@ -1,5 +1,10 @@
 {
   "name": "galonku-backend",
+  "description": "Backend section for Galonku Web application",
+  "main": "index.js",
+  "repository": "git@github.com:andromedaorg/galonku-backend.git",
+  "author": "Arie Brainware <jtucke22@mail.ccsf.edu>",
+  "license": "MIT",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,6 +19,7 @@
     "migrate:test:undo": "sequelize db:migrate:undo:all --env test",
     "start": "node index",
     "test": "jest test",
+    "test:debug": "jest test --detectOpenHandles --forceExit",
     "dev": "node-dev ./index",
     "seed:all": "sequelize db:seed:all --env test",
     "seed:undo": "sequelize db:seed:undo:all"
@@ -32,11 +38,6 @@
     "sequelize": "^4.38.0",
     "serve-favicon": "^2.5.0"
   },
-  "description": "Backend section for Galonku Web application",
-  "main": "index.js",
-  "repository": "git@github.com:andromedaorg/galonku-backend.git",
-  "author": "Arie Brainware <jtucke22@mail.ccsf.edu>",
-  "license": "MIT",
   "devDependencies": {
     "jest": "^23.5.0",
     "node-dev": "^3.1.3",
