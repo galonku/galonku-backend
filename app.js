@@ -30,7 +30,7 @@ app.use('/admins', adminRouter)
 app.use('/merchants', merchantRouter)
 app.use('/users', userRouter)
 app.use('/orders', orderRouter)
-app.use('/feedback', feedbackRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
