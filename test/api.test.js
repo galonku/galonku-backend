@@ -1,7 +1,8 @@
 const request = require('supertest')
 const app = require('../app')
 
-describe('API root endpoint', function () {
+
+describe('API root endpoint', () => {
     it('Expect response with status code 200', () => {
         return request(app)
             .get('/')
@@ -42,20 +43,17 @@ describe('API Verify token Admin', () => {
 })
 
 describe('API Merchants endpoint', () => {
-    test('Expect response with status code 200',  ()=> {
+    test('Expect response with status code 200', () => {
         return request(app)
             .get('/merchants')
             .expect(200)
-            .set('Accept', 'application/json')
-            .then(response =>expect(response).toBeTruthy())
     })
 })
 
 describe('API Merchants Register endpoint', () => {
-    test('Expect response with status code 417: Please fill all data', ()=> {
+    test('Expect response with status code 417: Please fill all data', () => {
         return request(app)
             .post('/merchants/register')
             .expect(417)
-            .then(response =>expect(response).toBeTruthy())
     })
 })
