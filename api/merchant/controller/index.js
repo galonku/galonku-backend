@@ -164,7 +164,6 @@ const controller = {
                 message: 'Merchant session',
                 role: 'merchant',
                 id,
-                username,
                 mstore_name,
                 token
               })

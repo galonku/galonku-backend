@@ -31,6 +31,7 @@ app.use('/merchants', merchantRouter)
 app.use('/users', userRouter)
 app.use('/orders', orderRouter)
 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404))
