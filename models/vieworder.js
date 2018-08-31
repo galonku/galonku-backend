@@ -4,10 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     "vieworder",
     {
       fullname: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(75)
       },
       store_name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100)
       },
       price: {
         type: DataTypes.INTEGER
