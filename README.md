@@ -11,37 +11,39 @@ Backend section for Galonku Web application
 
 _Note: Some URL/Endpoint is still under development_
 
-| URL / Endpoints                    | Method | Description               |
-| ---------------------------------- | ------ | ------------------------- |
-| </>                                | GET    | Show API Menu             |
-| </admins>                          | GET    | Show registered Admins    |
-| </admins/login>                    | POST   | Login as Admin account    |
-| </admins/logout>                   | GET    | Logout Admin account      |
-| </admins/verifytoken>              | GET    | Verify Admin token        |
-| </merchants>                       | GET    | Show registered Merchants |
-| </merchants/register>              | POST   | Register Merchants        |
-| </merchants/login/>                | POST   | Login as Merchants        |
-| </merchants/logout>                | GET    | Logout Merchants          |
-| </merchants/verifytoken>           | GET    | Verify Merchants token    |
-| </merchants/search?q={store_name}> | GET    | Search Merchants Store    |
-| </merchants/edit-profile/id>       | PUT    | Update profile Merchants  |
-| </merchants/reviews>               | GET    | Show Merchants review     |
-| </merchants/add-reviews>           | POST   | Add Merchants review      |
-| </users>                           | GET    | Show registered Users     |
-| </users/register>                  | POST   | Register an Users account |
-| </users/login>                     | POST   | Login as Users            |
-| </users/logout>                    | GET    | Logout from Users         |
-| </users/verifytoken>               | GET    | Verify Users Token        |
-| </users/edit-profile/:id>          | PUT    | Edit Users profile        |
-| </users/delete-account/:id>        | DELETE | Delete Users account      |
-| </users/search?q={username}>       | GET    | Search Users by username  |
-| </orders/>                         | GET    | Get orders                |
-| </orders/order>                    | POST   | Create order              |
+| URL / Endpoints                  | Method | Description                       |
+| -------------------------------- | ------ | --------------------------------- |
+| /                                | GET    | Show API Menu                     |
+| /admins                          | GET    | Show registered Admins            |
+| /admins/login                    | POST   | Login as Admin account            |
+| /admins/logout                   | GET    | Logout Admin account              |
+| /admins/verifytoken              | GET    | Verify Admin token                |
+| /merchants                       | GET    | Show registered Merchants         |
+| /merchants/register              | POST   | Register Merchants                |
+| /merchants/login/                | POST   | Login as Merchants                |
+| /merchants/logout                | GET    | Logout Merchants                  |
+| /merchants/verifytoken           | GET    | Verify Merchants token            |
+| /merchants/search?q={store_name} | GET    | Search Merchants Store            |
+| /merchants/edit-profile/id       | PUT    | Update profile Merchants          |
+| /merchants/reviews>              | GET    | Show Merchants review             |
+| /merchants/add-reviews           | POST   | Add Merchants review              |
+| /users                           | GET    | Show registered Users             |
+| /users/register                  | POST   | Register an Users account         |
+| /users/login                     | POST   | Login as Users                    |
+| /users/logout                    | GET    | Logout from Users                 |
+| /users/verifytoken               | GET    | Verify Users Token                |
+| /users/edit-profile/:id          | PUT    | Edit Users profile                |
+| /users/delete-account/:id        | DELETE | Delete Users account              |
+| /users/search?q={username}       | GET    | Search Users by username          |
+| /orders/                         | GET    | Get orders for logged in merchant |
+| /orders/order                    | POST   | Create order                      |
+| /orders/order/:id                | GET    | Show datails order                |
+| /orders/order/:id                | PUT    | Modify status order               |
+| /feedback                        | GET    | Show Galonku Application feedback |
 
 ## Database Design
 
 1.  Table Admin
-
 ```
 +-----------+--------------+--------+-------+-----------+----------------+
 | Field     | Type         | Null   | Key   |   Default | Extra          |
@@ -57,7 +59,6 @@ _Note: Some URL/Endpoint is still under development_
 ```
 
 2.  Table Merchant
-
 ```
 +-----------------+----------------------------+--------+-------+-----------+----------------+
 | Field           | Type                       | Null   | Key   | Default   | Extra          |
@@ -78,7 +79,6 @@ _Note: Some URL/Endpoint is still under development_
 ```
 
 3.  Table User
-
 ```
 +--------------+--------------+------+-----+---------+----------------+
 | Field        | Type         | Null | Key | Default | Extra          |
@@ -96,7 +96,6 @@ _Note: Some URL/Endpoint is still under development_
 ```
 
 4.  Table Order
-
 ```
 +--------------+----------------------------------+--------+-------+-----------+----------------+
 | Field        | Type                             | Null   | Key   | Default   | Extra          |
@@ -115,7 +114,6 @@ _Note: Some URL/Endpoint is still under development_
 ```
 
 5.  Table Logging
-
 ```
 +-----------+---------------------------------+--------+-------+-----------+----------------+
 | Field     | Type                            | Null   | Key   |   Default | Extra          |
@@ -131,7 +129,6 @@ _Note: Some URL/Endpoint is still under development_
 ```
 
 6.  Table Reviews
-
 ```
 +------------+-------------+--------+-------+-----------+----------------+
 | Field      | Type        | Null   | Key   |   Default | Extra          |
@@ -146,7 +143,6 @@ _Note: Some URL/Endpoint is still under development_
 ```
 
 7.  View Orders
-
 ```
 +--------------+----------------------------------+--------+-------+-----------+---------+
 | Field        | Type                             | Null   | Key   | Default   | Extra   |
@@ -161,4 +157,19 @@ _Note: Some URL/Endpoint is still under development_
 | Total        | bigint(21)                       | YES    |       | <null>    |         |
 | status       | enum('pending','process','done') | YES    |       | pending   |         |
 +--------------+----------------------------------+--------+-------+-----------+---------+
+```
+
+8. Table Feedback
+```
++--------------+-------------+--------+-------+-----------+----------------+
+| Field        | Type        | Null   | Key   |   Default | Extra          |
+|--------------+-------------+--------+-------+-----------+----------------|
+| id           | int(11)     | NO     | PRI   |    <null> | auto_increment |
+| name         | varchar(50) | NO     |       |    <null> |                |
+| email        | varchar(75) | NO     |       |    <null> |                |
+| phone_number | varchar(20) | YES    |       |    <null> |                |
+| comments     | text        | NO     |       |    <null> |                |
+| createdAt    | datetime    | NO     |       |    <null> |                |
+| updatedAt    | datetime    | NO     |       |    <null> |                |
++--------------+-------------+--------+-------+-----------+----------------+
 ```
