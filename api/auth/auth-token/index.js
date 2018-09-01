@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const models = require("../../../models/index");
-const Merchant = models.merchant;
 
 const controller = {
   valid: async (req, res) => {
