@@ -11,6 +11,7 @@ const adminRouter = require('./api/admin/index')
 const merchantRouter = require('./api/merchant/index')
 const userRouter = require('./api/user/index')
 const orderRouter = require('./api/order/index')
+const feedbackRouter = require('./api/feedback/index')
 
 const models = require('./models')
 
@@ -30,7 +31,7 @@ app.use('/admins', adminRouter)
 app.use('/merchants', merchantRouter)
 app.use('/users', userRouter)
 app.use('/orders', orderRouter)
-
+app.use('/feedback',feedbackRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
