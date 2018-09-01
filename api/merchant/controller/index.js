@@ -42,6 +42,9 @@ const controller = {
 
     if (keyword) {
       Merchant.findAll({
+        attributes: {
+          exclude: ["password"]
+        },
         where: {
           store_name: {
             [op.like]: `%${keyword}%`
