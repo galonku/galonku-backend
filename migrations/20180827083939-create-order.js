@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      quantity: {
+      quantities: {
         allowNull: false,
         type: Sequelize.INTEGER
       },

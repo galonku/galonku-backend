@@ -24,13 +24,14 @@ const controller = {
           let store_name = decoded.mstore_name;
           Vieworder.findAll({
             attributes: [
+              "idorder",
               "fullname",
               "address",
               "phone number",
               "notes",
               "store_name",
               "price",
-              "quantity",
+              "quantities",
               "Total",
               "status"
             ],
@@ -44,7 +45,7 @@ const controller = {
       });
     } else {
       res.status(400).send({
-        message: "Please specify your Developer token in request headers"
+        message: "Please specify the token in request headers"
       });
     }
   },
@@ -54,19 +55,19 @@ const controller = {
       iduser,
       idmerchants,
       merchant,
-      quantity,
+      quantities,
       phone_number,
       user_address,
       user_notes
     } = req.body;
-    if (iduser && merchant && quantity && phone_number && user_address) {
+    if (iduser && merchant && quantities && phone_number && user_address) {
       User.findById(iduser).then(user => {
         if (user) {
           return Order.create({
             iduser,
             idmerchants,
             merchant,
-            quantity,
+            quantities,
             phone_number,
             user_address,
             user_notes,
@@ -91,16 +92,65 @@ const controller = {
         }
       });
     } else {
-      res.status(417).send({ message: "Please fill all parameters" });
+      res.status(417).send({ message: "Please fill all fields" });
     }
   },
 
   showOrderById: (req, res) => {
-    const { id } = req.params
-    if(id){
-      Order.findById(id)
-      .then(orders=>res.status(200).send(orders))
+    const { id } = req.params;
+    const sequelize = require("sequelize");
+    const op = sequelize.Op;
+    const DevToken =
+      req.headers.authorization &&
+      req.headers.authorization.split(" ")[0] === "Bearer";
+    if (DevToken) {
+      const token = req.headers.authorization.split(" ")[1] || "";
+      jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+        if (error) {
+          res.status(417).send({
+            message: "Token is invalid"
+          });
+        } else {
+          req.decoded = decoded;
+          let fullname = decoded.ufullname;
+          let store_name = decoded.mstore_name;
+          Vieworder.findOne({
+            attributes: [
+              "idorder",
+              "fullname",
+              "address",
+              "phone number",
+              "notes",
+              "store_name",
+              "price",
+              "quantities",
+              "Total",
+              "status"
+            ],
+            where: {
+              [op.or]: [{ fullname: fullname }, { store_name: store_name }],
+              idorder: id
+            }
+          }).then(data => {
+            if (data) {
+              res.status(200).send(data);
+            } else {
+              res.status(404).send({
+                message: "You dont have order by that id"
+              });
+            }
+          });
+        }
+      });
+    } else {
+      res.status(400).send({
+        message: "Please specify the token in request headers"
+      });
     }
+  },
+
+  updateOrderStatus: (req, res) => {
+    // blm bisa
   }
 };
 
