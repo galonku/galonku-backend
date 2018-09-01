@@ -121,7 +121,7 @@ const controller = {
         if (user) {
           const ufullname = user.fullname;
           bcrypt.compare(password, user.password).then(response => {
-            const { id }= user
+            const { id } = user;
             if (response) {
               const token = jwt.sign(
                 {

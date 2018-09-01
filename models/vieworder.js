@@ -3,16 +3,19 @@ module.exports = (sequelize, DataTypes) => {
   var vieworder = sequelize.define(
     "vieworder",
     {
+      idorder: {
+        type: DataTypes.INTEGER
+      },
       fullname: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(75)
       },
       store_name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100)
       },
       price: {
         type: DataTypes.INTEGER
       },
-      quantity: {
+      quantities: {
         type: DataTypes.INTEGER
       },
       Total: {
