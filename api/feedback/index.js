@@ -1,6 +1,8 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const authToken = require('../auth/auth-token')
+const controller = require('./controller/index')
 
-router.get('/feedback',authToken.verifyTokenAsMerchants,controller.show)
+router.get('/',controller.show)
+
+module.exports=router
