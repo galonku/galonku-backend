@@ -60,7 +60,7 @@ const controller = {
       user_address,
       user_notes
     } = req.body;
-    if (iduser && merchant && quantity && phone_number && user_address) {
+    if (iduser && merchant && quantities && phone_number && user_address) {
       User.findById(iduser).then(user => {
         if (user) {
           return Order.create({
@@ -147,6 +147,10 @@ const controller = {
         message: "Please specify the token in request headers"
       });
     }
+  },
+
+  updateOrderStatus: (req, res) => {
+    // blm bisa
   }
 };
 
