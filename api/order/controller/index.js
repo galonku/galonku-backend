@@ -94,6 +94,14 @@ const controller = {
     } else {
       res.status(417).send({ message: "Please fill all fields" });
     }
+  },
+
+  showOrderById: (req, res) => {
+    const { id } = req.params
+    if(id){
+      Order.findById(id)
+      .then(orders=>res.status(200).send(orders))
+    }
   }
 };
 
