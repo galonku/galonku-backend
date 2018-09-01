@@ -24,6 +24,7 @@ const controller = {
           let store_name = decoded.mstore_name;
           Vieworder.findAll({
             attributes: [
+              "idorder",
               "fullname",
               "address",
               "phone number",
