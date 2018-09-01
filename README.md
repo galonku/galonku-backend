@@ -158,3 +158,18 @@ _Note: Some URL/Endpoint is still under development_
     | Total        | bigint(21)                       | YES    |       | <null>    |         |
     | status       | enum('pending','process','done') | YES    |       | pending   |         |
     +--------------+----------------------------------+--------+-------+-----------+---------+
+
+8. Table Feedback
+
+
+    +--------------+-------------+--------+-------+-----------+----------------+
+    | Field        | Type        | Null   | Key   |   Default | Extra          |
+    |--------------+-------------+--------+-------+-----------+----------------|
+    | id           | int(11)     | NO     | PRI   |    <null> | auto_increment |
+    | name         | varchar(50) | NO     |       |    <null> |                |
+    | email        | varchar(75) | NO     |       |    <null> |                |
+    | phone_number | varchar(20) | YES    |       |    <null> |                |
+    | comments     | text        | NO     |       |    <null> |                |
+    | createdAt    | datetime    | NO     |       |    <null> |                |
+    | updatedAt    | datetime    | NO     |       |    <null> |                |
+    +--------------+-------------+--------+-------+-----------+----------------+
