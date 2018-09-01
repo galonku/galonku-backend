@@ -11,6 +11,7 @@ const adminRouter = require('./api/admin/index')
 const merchantRouter = require('./api/merchant/index')
 const userRouter = require('./api/user/index')
 const orderRouter = require('./api/order/index')
+const feedbackRouter = require('./api/feedback/index')
 
 const models = require('./models')
 
