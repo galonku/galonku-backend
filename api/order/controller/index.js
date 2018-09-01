@@ -27,7 +27,7 @@ const controller = {
               "idorder",
               "fullname",
               "address",
-              "phone number",
+              "phone_number",
               "notes",
               "store_name",
               "price",
@@ -150,7 +150,30 @@ const controller = {
   },
 
   updateOrderStatus: (req, res) => {
-    // blm bisa
+    const { id } = req.params
+    const {status } = req.body
+    
+    if (id) {
+      Order.findById(id)
+        .then(order => {
+          if (order) {            
+            Order.update({
+              status
+            }, {
+                where: {
+                  id
+                }
+              })
+              .then(order => {
+                res.status(200).send({message:'Status updated'})
+              }).catch(error=> res.status(500).send(error))
+          } else {
+            res.status(404).send({ message: "Order doesnt exist!" })
+          }
+        })
+    } else {
+      res.status(417).send({ message: "Please specify the Order ID" })
+    }
   }
 };
 
