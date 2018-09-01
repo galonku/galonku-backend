@@ -119,7 +119,7 @@ const controller = {
               "idorder",
               "fullname",
               "address",
-              "phone number",
+              "phone_number",
               "notes",
               "store_name",
               "price",
