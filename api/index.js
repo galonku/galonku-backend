@@ -40,7 +40,11 @@ router.get("/", function (req, res, next) {
         },
         orders: {
           "show-oders": `${host}/orders`,
-          "order": `${host}/orders/order`
+          "order": `${host}/orders/order`,
+          "show-details-order":`${host}/orders/order/:id`,
+          "modify-status-order":`${host}/orders/order/:id`,
+          "show-feedback":`${host}/feedback`,
+          "send-feedback":`${host}/feedback/send`
         }
       }
     ]
