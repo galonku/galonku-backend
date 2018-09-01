@@ -7,13 +7,11 @@ before_script:
   - greenkeeper-lockfile-update
   - yarn
   - yarn migrate:test
-  - yarn seed:all
-  - yarn migrate:undo:all  
+  - yarn seed:all 
 script: yarn test
 after_script:
   - greenkeeper-lockfile-upload
   - yarn migrate:test:undo
-  - yarn migrate
 cache:
   yarn: true
   directories:
