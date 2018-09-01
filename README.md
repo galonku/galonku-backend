@@ -40,6 +40,7 @@ _Note: Some URL/Endpoint is still under development_
 | /orders/order/:id                | GET    | Show datails order                |
 | /orders/order/:id                | PUT    | Modify status order               |
 | /feedback                        | GET    | Show Galonku Application feedback |
+| /feedback/send                   | POST   | Send feedback for Galonku Application |
 
 ## Database Design
 
