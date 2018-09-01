@@ -8,10 +8,12 @@ before_script:
   - yarn
   - yarn migrate:test
   - yarn seed:all
+  - yarn migrate:undo:all  
 script: yarn test
 after_script:
   - greenkeeper-lockfile-upload
   - yarn migrate:test:undo
+  - yarn migrate
 cache:
   yarn: true
   directories:
