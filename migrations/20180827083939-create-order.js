@@ -38,8 +38,8 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.ENUM("pending", "rejected", "progress", "delivering","done"),
-        defaultValue: "Pending"
+        type: Sequelize.STRING(30),
+        defaultValue: "pending"
       },
       createdAt: {
         allowNull: false,
