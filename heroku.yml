@@ -3,8 +3,8 @@ build:
     - nodejs
   pre:
     - yarn migrate:undo:all
-  post:
     - yarn migrate
+  post:
     - echo 'app installed'
 run:
   web: yarn start
