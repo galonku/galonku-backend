@@ -27,15 +27,18 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.TEXT
       },
-      user_notes: DataTypes.TEXT,
+      user_notes: {
+        type: DataTypes.TEXT
+      },
       status: {
         allowNull: false,
-        type: DataTypes.ENUM("pending", "rejected", "progress", "delivering","done")
+        type: DataTypes.STRING(30),
+        defaultValue: "pending"
       }
     },
     {}
   );
-  order.associate = function(models) {
+  order.associate = function (models) {
     // associations can be defined here
   };
   return order;

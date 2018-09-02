@@ -9,7 +9,7 @@ router.get("/order/:id", authToken.verifyToken, controller.showOrderById);
 router.post("/order", authToken.verifyTokenAsUser, controller.createOrder);
 router.put(
   "/order/:id",
-  authToken.verifyTokenAsMerchants,
+  authToken.verifyToken,
   controller.updateOrderStatus
 );
 module.exports = router;
