@@ -24,6 +24,9 @@
     "seed:all": "sequelize db:seed:all --env test",
     "seed:undo": "sequelize db:seed:undo:all"
   },
+  "engines": {
+    "node": "10.0.0"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.3",
