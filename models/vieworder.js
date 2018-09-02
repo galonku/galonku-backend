@@ -9,6 +9,15 @@ module.exports = (sequelize, DataTypes) => {
       fullname: {
         type: DataTypes.STRING(75)
       },
+      address: {
+        type: DataTypes.STRING
+      },
+      phone_number: {
+        type: DataTypes.STRING
+      },
+      notes: {
+        type: DataTypes.STRING
+      },
       store_name: {
         type: DataTypes.STRING(100)
       },
@@ -20,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       Total: {
         type: DataTypes.INTEGER
+      },
+      status: {
+        type: DataTypes.ENUM("pending, rejected, progress, delivering")
       }
     },
     {}
