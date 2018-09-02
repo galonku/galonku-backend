@@ -5,18 +5,6 @@ const models = require("../../../models/index");
 const Admin = models.admin;
 const Logging = models.logging;
 
-require("dotenv-extended").load({
-  encoding: "utf8",
-  silent: true,
-  path: ".env",
-  defaults: ".env.defaults",
-  schema: ".env.schema",
-  errorOnMissing: false,
-  errorOnExtra: false,
-  assignToProcessEnv: true,
-  overrideProcessEnv: false
-});
-
 const controller = {
   show: async (req, res) => {
     Admin.findAll({
