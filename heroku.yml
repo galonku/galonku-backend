@@ -2,6 +2,7 @@ build:
   languages:
     - nodejs
   pre:
+    - yarn migrate:undo:all
     - yarn migrate
   post:
     - echo 'app installed'
