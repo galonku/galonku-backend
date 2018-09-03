@@ -211,17 +211,30 @@ const controller = {
       .then(data => res.status(200).send({ data }))
   },
 
+  showReviewByOrderID:async(req,res) =>{
+    const idOrder =  req.params.id
+
+    Review.findAll({
+      where:{
+        idorder:idOrder
+      }
+    }).then(review => res.status(200).send({review}))
+    .catch(error => res.status(500).send(error))
+  },
+
   addReviews: async (req, res) => {
-    const { comments, store_name, username } = req.body
+    const { comments, store_name, username,idorder,rating } = req.body
     Review.build({
       comments,
       store_name,
       username,
+      idorder,
+      rating,
       createdAt: new Date() + 7,
       updatedAt: new Date() + 7
     })
       .save()
-      .then(newReviews => res.status(200).send({ newReviews }))
+      .then(reviews => res.status(200).send({ reviews }))
       .catch(err => res.status(500).send(err))
   }
 }

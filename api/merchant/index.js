@@ -20,6 +20,7 @@ router.put(
 router.post("/register/", controller.register);
 
 router.get('/reviews', authToken.verifyTokenAsMerchants, controller.showReviews)
+router.get('/reviews/:id',authToken.verifyTokenAsMerchants,controller.showReviewByOrderID)
 router.post('/add-reviews', authToken.verifyTokenAsUser, controller.addReviews)
 
 module.exports = router;
