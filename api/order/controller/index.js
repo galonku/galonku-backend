@@ -71,7 +71,7 @@ const controller = {
             phone_number,
             user_address,
             user_notes,
-            status: "Pending",
+            status: "pending",
             createdAt: new Date() + 7,
             updatedAt: new Date() + 7
           })
