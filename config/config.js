@@ -12,24 +12,24 @@ require('dotenv-extended').load({
 
 module.exports = {
   "development": {
-    "username": process.env.DEVELOPMENT_DB_USERNAME,
-    "password": process.env.DEVELOPMENT_DB_PASSWORD,
-    "database": process.env.DEVELOPMENT_DB_NAME,
-    "host": process.env.DEVELOPMENT_DB_HOST,
-    "dialect": process.env.DEVELOPMENT_DB_DIALECT
+    "username": process.env.DBUSERNAME,
+    "password": process.env.DBPASSWORD,
+    "database": process.env.DBNAME,
+    "host": process.env.DBHOST,
+    "dialect": "mysql"
   },
   "test": {
-    "username": process.env.TEST_DB_USERNAME,
-    "password": process.env.TEST_DB_PASSWORD,
-    "database": process.env.TEST_DB_NAME,
-    "host": process.env.TEST_DB_HOST,
-    "dialect": process.env.TEST_DB_DIALECT
+    "username": process.env.TEST_DBUSERNAME,
+    "password": process.env.TEST_DBPASSWORD,
+    "database": process.env.TEST_DBNAME,
+    "host": process.env.TEST_DBHOST,
+    "dialect": "mysql"
   },
   "production": {
-    "username": process.env.PRODUCTION_DB_USERNAME,
-    "password": process.env.PRODUCTION_DB_PASSWORD,
-    "database": process.env.PRODUCTION_DB_NAME,
-    "host": process.env.PRODUCTION_DB_HOST,
-    "dialect": process.env.PRODUCTION_DB_DIALECT
+    "username": process.env.PRODUCTION_DBUSERNAME,
+    "password": process.env.PRODUCTION_DBPASSWORD,
+    "database": process.env.PRODUCTION_DBNAME,
+    "host": process.env.PRODUCTION_DBHOST,
+    "dialect": "mysql"
   }
 }
