@@ -8,8 +8,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setup": "yarn && yarn migrate",
-    "setup:undo": "yarn migrate:undo",
+    "setup": "npm i && npm run migrate",
+    "setup:undo": "npm run migrate:undo",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "migrate:undo:all": "sequelize db:migrate:undo:all",
@@ -37,7 +37,7 @@
     "http-errors": "~1.7.1",
     "jsonwebtoken": "^8.4.0",
     "morgan": "~1.9.0",
-    "mysql2": "^1.6.4",
+    "mysql2": "^1.6.5",
     "sequelize": "^4.41.2",
     "serve-favicon": "^2.5.0"
   },
