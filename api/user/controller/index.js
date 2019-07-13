@@ -225,7 +225,7 @@ const controller = {
   },
 
   logout: async (req, res) => {
-    res.status(200).send({ message: "Logout successdul" });
+    res.status(200).send({ message: "Logout successfully" });
   },
 
   deleteAccount: async (req, res) => {
