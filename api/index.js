@@ -6,7 +6,7 @@ router.get("/", function (req, res, next) {
   const node_env = process.env.NODE_ENV;
   let host = "";
   if (node_env === "development") host = "localhost:3000";
-  else host = "https://galonku.herokuapp.com";
+  else host = "https://api.ariebrainware.com/galonku/v1";
   res.status(200).send({
     title: "Welcome to Galonku API",
     content: [
