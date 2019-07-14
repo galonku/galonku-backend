@@ -6,7 +6,7 @@ router.get("/", function (req, res, next) {
   const node_env = process.env.NODE_ENV;
   let host = "";
   if (node_env === "development") host = "localhost:3000";
-  else host = "https://api.ariebrainware.com/galonku/v1";
+  else host = "https://api.ariebrainware.com/v1/galonku";
   res.status(200).send({
     title: "Welcome to Galonku API",
     content: [
@@ -15,7 +15,7 @@ router.get("/", function (req, res, next) {
           "show-admins": `${host}/admins`,
           "login": `${host}/admins/login`,
           "logout": `${host}/admins/logout`,
-          "verify-token": "${host}/admins/verifytoken",
+          "verify-token": `${host}/admins/verifytoken`,
           "delete-account": `${host}/admins/delete-account/:id`
         },
         merchants: {
