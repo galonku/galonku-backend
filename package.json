@@ -38,7 +38,7 @@
     "jsonwebtoken": "^8.3.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.1",
-    "sequelize": "^5.1.0",
+    "sequelize": "^5.19.2",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
